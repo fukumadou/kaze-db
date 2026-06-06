@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fujii Kaze One-Stop Database - 劇団FUKUMADOU</title>
+    <style>
+        :root {
+            --bg-color: #121812;
+            --container-bg: #1a241a;
+            --accent-color: #2e4a34;
+            --text-main: #e8eee9;
+            --text-sub: #a3b8a7;
+            --btn-yt: #b33939;
+            --btn-spot: #218c74;
+            --border-color: #253427;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+        .header p {
+            margin: 5px 0 0 0;
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+        .grid-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .song-card {
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .song-card:hover {
+            transform: translateY(-5px);
+        }
+        .song-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--text-sub);
+            padding-left: 10px;
+        }
+        .song-meta {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 15px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn-youtube {
+            background-color: var(--btn-yt);
+        }
+        .btn-spotify {
+            background-color: var(--btn-spot);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>FUJII KAZE ONE-STOP DATABASE</h1>
+        <p>Produced by 劇団FUKUMADOU</p>
+    </div>
+
+    <div class="grid-container">
+        <div class="song-card">
+            <div class="song-title">満ちてゆく (Overflowing)</div>
+            <div class="song-meta">映画『四月になれば彼女は』主題歌 / 2024年配信シングル</div>
+            <div class="btn-group">
+                <a href="https://www.youtube.com/watch?v=Tl3_MGx50To" target="_blank" class="btn btn-youtube">YouTube</a>
+                <a href="https://open.spotify.com/album/4vS7XbOby7vL5YkUaWvYFm" target="_blank" class="btn btn-spotify">Spotify</a>
+            </div>
+        </div>
+
+        <div class="song-card">
+            <div class="song-title">死ぬのがいいわ (Shinunoga E-Wa)</div>
+            <div class="song-meta">アルバム『HELP EVER HURT NEVER』収録 / 世界的バイラルヒット</div>
+            <div class="btn-group">
+                <a href="https://www.youtube.com/watch?v=dawrQnwXnnA" target="_blank" class="btn btn-youtube">YouTube</a>
+                <a href="https://open.spotify.com/track/0wMv96g76w676bBt96v3Is" target="_blank" class="btn btn-spotify">Spotify</a>
+            </div>
+        </div>
+
+        <div class="song-card">
+            <div class="song-title">まつり (Matsuri)</div>
+            <div class="song-meta">2ndアルバム『LOVE ALL SERVE ALL』収録</div>
+            <div class="btn-group">
+                <a href="https://www.youtube.com/watch?v=NwOvu-j_WjY" target="_blank" class="btn btn-youtube">YouTube</a>
+                <a href="https://open.spotify.com/track/4XvWd7j1p8NpxC4wcoSAt9" target="_blank" class="btn btn-spotify">Spotify</a>
+            </div>
+        </div>
+
+        <div class="song-card">
+            <div class="song-title">きらり (Kirari)</div>
+            <div class="song-meta">Honda「VEZEL」CMソング / 2021年配信シングル</div>
+            <div class="btn-group">
+                <a href="https://www.youtube.com/watch?v=TcLLpZBlZmY" target="_blank" class="btn btn-youtube">YouTube</a>
+                <a href="https://open.spotify.com/track/3IEis6v0pU9XhG9w6PjTid" target="_blank" class="btn btn-spotify">Spotify</a>
+            </div>
+        </div>
+
+        <div class="song-card">
+            <div class="song-title">何なんw (Nan-Nan)</div>
+            <div class="song-meta">デビューシングル / アルバム『HELP EVER HURT NEVER』収録</div>
+            <div class="btn-group">
+                <a href="https://www.youtube.com/watch?v=Nt6ZwdvjvS8" target="_blank" class="btn btn-youtube">YouTube</a>
+                <a href="https://open.spotify.com/track/3f683F2M3B6jZpX0V9P2rZ" target="_blank" class="btn btn-spotify">Spotify</a>
+            </div>
+        </div>
+
+        <div class="song-card">
+            <div class="song-title">花 (Hana)</div>
+            <div class="song-meta">フジテレビ系木曜劇場『いちばんすきな花』主題歌</div>
+            <div class="btn-group">
+                <a href="https://www.youtube.com/watch?v=7uU_gV9wcoM" target="_blank" class="btn btn-youtube">YouTube</a>
+                <a href="https://open.spotify.com/track/6gWwWz0a6fU9wS8B4X4xO1" target="_blank" class="btn btn-spotify">Spotify</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
