@@ -5,75 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>劇団FUKUMADOU - 藤井風 楽曲データベース</title>
     <style>
+        /* 1. 主宰お気に入りの最高に美しいダークラグジュアリー背景 */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: #0d0e12;
+            color: #e2e8f0;
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
         }
         h1 {
             text-align: center;
-            color: #1db954;
-            margin-bottom: 30px;
+            color: #ffffff;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
+        .subtitle {
+            text-align: center;
+            color: #a0aec0;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+        /* 2. カードがきれいに整列する魔法のグリッド */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
+        /* 3. 主宰お気に入りのしぶいグラデーション高級カード */
         .card {
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #282828;
-            transition: transform 0.2s;
+            background: linear-gradient(145deg, #1e2029, #16171d);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 1px solid #2d313f;
+            transition: all 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border-color: #4a5568;
         }
         .card h2 {
             margin-top: 0;
+            margin-bottom: 20px;
             color: #ffffff;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-left: 4px solid #4a5568;
+            padding-left: 10px;
         }
+        /* 4. 横並びのボタン */
         .btn-group {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
         }
         .btn {
             flex: 1;
             text-align: center;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 12px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            transition: background 0.2s;
         }
         .btn-yt {
-            background-color: #ff0000;
+            background-color: #e53e3e;
             color: #ffffff;
         }
+        .btn-yt:hover { background-color: #c53030; }
         .btn-sp {
-            background-color: #1db954;
+            background-color: #2f855a;
             color: #ffffff;
         }
+        .btn-sp:hover { background-color: #22543d; }
     </style>
 </head>
 <body>
 
-    <h1>劇団FUKUMADOU<br>藤井風 楽曲データベース</h1>
+    <h1>劇団FUKUMADOU</h1>
+    <div class="subtitle">藤井風 楽曲データベース</div>
 
     <div class="grid-container">
+
         <div class="card">
             <h2>満ちてゆく</h2>
             <div class="btn-group">
                 <a href="https://youtu.be/Cc6wN4M7EJA" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/4M69RjJpG1B6Oclw9L8pW0" target="_blank" class="btn btn-sp">Spotify</a>
+                <a href="https://open.spotify.com/intl-ja/track/4I782EaM09M9tV882H8v8G" target="_blank" class="btn btn-sp">Spotify</a>
             </div>
         </div>
 
@@ -81,7 +104,7 @@
             <h2>死ぬのがいいわ</h2>
             <div class="btn-group">
                 <a href="https://youtu.be/dawrQnvwMTY" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wM4639N6w2899wZ6wM541" target="_blank" class="btn btn-sp">Spotify</a>
+                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09999" target="_blank" class="btn btn-sp">Spotify</a>
             </div>
         </div>
 
@@ -89,7 +112,7 @@
             <h2>まつり</h2>
             <div class="btn-group">
                 <a href="https://youtu.be/NwOvu-j_WjY" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0XyJb7aY7zX98m4C0I4mJk" target="_blank" class="btn btn-sp">Spotify</a>
+                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09998" target="_blank" class="btn btn-sp">Spotify</a>
             </div>
         </div>
 
@@ -97,7 +120,7 @@
             <h2>きらり</h2>
             <div class="btn-group">
                 <a href="https://youtu.be/TcLLpZwsF_E" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/4W889e4Y9m6o0Jj0y7q3wX" target="_blank" class="btn btn-sp">Spotify</a>
+                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09997" target="_blank" class="btn btn-sp">Spotify</a>
             </div>
         </div>
 
@@ -105,7 +128,7 @@
             <h2>何なんw</h2>
             <div class="btn-group">
                 <a href="https://youtu.be/Nt6ZwuVzOS4" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wS07Xw29m8O9y6M139pJW" target="_blank" class="btn btn-sp">Spotify</a>
+                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09996" target="_blank" class="btn btn-sp">Spotify</a>
             </div>
         </div>
 
@@ -113,10 +136,11 @@
             <h2>花</h2>
             <div class="btn-group">
                 <a href="https://youtu.be/dflEEg8L66g" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/4P9n4R7F9m6o0Jj0y7q3wX" target="_blank" class="btn btn-sp">Spotify</a>
+                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09995" target="_blank" class="btn btn-sp">Spotify</a>
             </div>
         </div>
-    </div>
+
+        </div>
 
 </body>
 </html>
