@@ -1,146 +1,110 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>劇団FUKUMADOU - 藤井風 楽曲データベース</title>
-    <style>
-        /* 1. 主宰お気に入りの最高に美しいダークラグジュアリー背景 */
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #0d0e12;
-            color: #e2e8f0;
-            margin: 0;
-            padding: 40px 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #ffffff;
-            font-size: 2.2rem;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.2);
-        }
-        .subtitle {
-            text-align: center;
-            color: #a0aec0;
-            margin-bottom: 40px;
-            font-size: 1rem;
-        }
-        /* 2. カードがきれいに整列する魔法のグリッド */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        /* 3. 主宰お気に入りのしぶいグラデーション高級カード */
-        .card {
-            background: linear-gradient(145deg, #1e2029, #16171d);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            border: 1px solid #2d313f;
-            transition: all 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-            border-color: #4a5568;
-        }
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: 600;
-            border-left: 4px solid #4a5568;
-            padding-left: 10px;
-        }
-        /* 4. 横並びのボタン */
-        .btn-group {
-            display: flex;
-            gap: 12px;
-        }
-        .btn {
-            flex: 1;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: background 0.2s;
-        }
-        .btn-yt {
-            background-color: #e53e3e;
-            color: #ffffff;
-        }
-        .btn-yt:hover { background-color: #c53030; }
-        .btn-sp {
-            background-color: #2f855a;
-            color: #ffffff;
-        }
-        .btn-sp:hover { background-color: #22543d; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fujii Kaze Global Discography</title>
+  <style>
+    /* ==========================================
+       🎨 スマホ対応（レスポンシブ）CSS
+       ========================================== */
+    
+    /* 全体の基本設定 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fcfbfa; /* 陶器の背景に馴染む柔らかい白 */
+      color: #333;
+    }
+
+    /* 1. ヘッダー（一番上のエリア）全体の調整 */
+    .site-header {
+      display: flex;
+      flex-direction: column; /* スマホでは縦並びにする */
+      align-items: center;
+      padding: 20px 10px;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    /* 2. ロゴ画像リンクの設定 */
+    .logo-link {
+      display: inline-block;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+      max-width: 100%;
+      text-align: center;
+    }
+    
+    /* タップしたときに少し透明にして「ボタン感」を出す */
+    .logo-link:hover, .logo-link:active {
+      opacity: 0.8;
+    }
+
+    /* 3. ロゴ画像のサイズ調整（スマホでも絶対にはみ出さない） */
+    .header-logo-img {
+      max-width: 100%;
+      height: auto;
+      max-height: 250px; /* パソコン画面で大きくなりすぎないように制限 */
+      object-fit: contain;
+    }
+
+    /* 4. 英語ナビゲーションメニューの配置 */
+    .header-nav {
+      display: flex;
+      flex-wrap: wrap; /* 画面が狭いときは自動で折り返す */
+      justify-content: center;
+      gap: 15px;      /* ボタン同士の程よいスキマ */
+      margin-top: 15px;
+      padding: 0;
+    }
+
+    /* メニューボタン単体の見た目 */
+    .nav-item {
+      text-decoration: none;
+      color: #4a4a4a;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 5px 8px;
+    }
+
+    /* 現在いるページのメニューを強調（HOMEの下線） */
+    .nav-item.active {
+      font-weight: bold;
+      border-bottom: 2px solid #4a4a4a;
+    }
+
+    /* パソコンなど画面が広いとき（横幅が600px以上）の調整 */
+    @media (min-width: 600px) {
+      .site-header {
+        flex-direction: column; /* PCでも美しいアートを中央に魅せるため縦並びを維持 */
+        padding: 30px 20px;
+      }
+      .nav-item {
+        font-size: 14px;
+        gap: 25px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <h1>劇団FUKUMADOU</h1>
-    <div class="subtitle">藤井風 楽曲データベース</div>
+  <header class="site-header">
+    
+    <a href="index.html" class="logo-link" title="Go to Home">
+      <img src="http://googleusercontent.com/image_generation_content/2" alt="Fujii Kaze Global Discography" class="header-logo-img">
+    </a>
+    
+    <nav class="header-nav">
+      <a href="index.html" class="nav-item active">HOME</a>
+      <a href="#albums" class="nav-item">ALBUMS</a>
+      <a href="#singles" class="nav-item">SINGLES</a>
+      <a href="#global-map" class="nav-item">GLOBAL MAP</a>
+      <a href="#about" class="nav-item">ABOUT</a>
+    </nav>
+    
+  </header>
 
-    <div class="grid-container">
-
-        <div class="card">
-            <h2>満ちてゆく</h2>
-            <div class="btn-group">
-                <a href="https://youtu.be/Cc6wN4M7EJA" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/4I782EaM09M9tV882H8v8G" target="_blank" class="btn btn-sp">Spotify</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>死ぬのがいいわ</h2>
-            <div class="btn-group">
-                <a href="https://youtu.be/dawrQnvwMTY" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09999" target="_blank" class="btn btn-sp">Spotify</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>まつり</h2>
-            <div class="btn-group">
-                <a href="https://youtu.be/NwOvu-j_WjY" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09998" target="_blank" class="btn btn-sp">Spotify</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>きらり</h2>
-            <div class="btn-group">
-                <a href="https://youtu.be/TcLLpZwsF_E" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09997" target="_blank" class="btn btn-sp">Spotify</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>何なんw</h2>
-            <div class="btn-group">
-                <a href="https://youtu.be/Nt6ZwuVzOS4" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09996" target="_blank" class="btn btn-sp">Spotify</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>花</h2>
-            <div class="btn-group">
-                <a href="https://youtu.be/dflEEg8L66g" target="_blank" class="btn btn-yt">YouTube</a>
-                <a href="https://open.spotify.com/intl-ja/track/0wY99X2W9983XwV0P09995" target="_blank" class="btn btn-sp">Spotify</a>
-            </div>
-        </div>
-
-        </div>
-
-</body>
+  </body>
 </html>
