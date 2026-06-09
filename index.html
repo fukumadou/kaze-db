@@ -6,184 +6,645 @@
   <title>Fujii Kaze Global Accordion DB</title>
   <style>
     :root {
-      --bg1:#f8f2e8; --bg2:#e6efe7; --ink:#26342d; --muted:#69756e;
-      --card:rgba(255,255,255,.72); --line:rgba(38,52,45,.13);
-      --accent:#7f9f86; --accent2:#c9a66b; --shadow:0 18px 50px rgba(54,70,58,.14);
+      --cream: #f8f1e5;
+      --sand: #eadcc6;
+      --linen: #fffaf1;
+      --sage: #7d8b68;
+      --olive: #5f6c4f;
+      --wood: #8a6741;
+      --ink: #2d2a22;
+      --muted: #776d5e;
+      --line: rgba(92, 75, 49, 0.18);
+      --card: rgba(255, 250, 241, 0.78);
+      --shadow: 0 18px 50px rgba(74, 56, 32, 0.13);
+      --radius: 28px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
-      color:var(--ink);
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Hiragino Sans", sans-serif;
       background:
-        radial-gradient(circle at 15% 0%, rgba(201,166,107,.30), transparent 33%),
-        radial-gradient(circle at 90% 12%, rgba(127,159,134,.34), transparent 38%),
-        linear-gradient(135deg,var(--bg1),var(--bg2));
-      min-height:100vh;
+        radial-gradient(circle at 12% 18%, rgba(125,139,104,.18), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(138,103,65,.18), transparent 34%),
+        linear-gradient(135deg, var(--cream), #edf1e4 58%, #f7ead8);
+      min-height: 100vh;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{width:min(980px,92vw);margin:auto}
-    header{
-      position:sticky;top:0;z-index:10;backdrop-filter:blur(18px);
-      background:rgba(248,242,232,.72);border-bottom:1px solid var(--line)
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
-    .brand{font-weight:800;letter-spacing:-.04em;font-size:clamp(18px,4vw,25px)}
-    .brand span{color:var(--accent)}
-    .menu{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .menu a,.pill{
-      padding:9px 13px;border:1px solid var(--line);border-radius:999px;
-      background:rgba(255,255,255,.45);font-size:13px;font-weight:700
+
+    .wrap {
+      width: min(980px, 92vw);
+      margin: auto;
     }
-    .hero{padding:62px 0 28px;text-align:center}
-    .eyebrow{color:var(--accent2);font-weight:800;letter-spacing:.16em;font-size:12px}
-    h1{font-size:clamp(34px,8vw,74px);line-height:.93;margin:14px 0;letter-spacing:-.07em}
-    .lead{font-size:clamp(15px,3.8vw,19px);color:var(--muted);line-height:1.85;margin:0 auto;max-width:720px}
-    .official{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}
-    .official a,.song a{
-      display:inline-flex;align-items:center;gap:7px;border-radius:999px;
-      padding:9px 13px;background:rgba(255,255,255,.62);border:1px solid var(--line);
-      font-weight:800;font-size:12px;transition:.25s ease
+
+    .site-header {
+      background: linear-gradient(180deg, rgba(255,250,241,.94), rgba(234,220,198,.88));
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 30px rgba(74, 56, 32, 0.08);
     }
-    .official a:hover,.song a:hover,.menu a:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-    .searchBox{margin:24px auto 6px;max-width:760px}
-    input{
-      width:100%;border:1px solid var(--line);border-radius:24px;padding:18px 22px;
-      background:rgba(255,255,255,.78);box-shadow:var(--shadow);font-size:16px;color:var(--ink);outline:none
+
+    .hero-image-link {
+      display: block;
+      width: 100%;
+      line-height: 0;
+      overflow: hidden;
+      background: #d7c0a0;
     }
-    section{padding:28px 0}
-    h2{font-size:clamp(25px,6vw,42px);letter-spacing:-.05em;margin:0 0 16px}
-    .accordion{display:grid;gap:14px}
-    details{
-      background:var(--card);border:1px solid var(--line);border-radius:28px;
-      box-shadow:var(--shadow);overflow:hidden
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: clamp(180px, 34vw, 430px);
+      object-fit: cover;
+      object-position: center;
+      transition: transform .55s ease, filter .55s ease;
     }
-    summary{
-      cursor:pointer;list-style:none;padding:21px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center
+
+    .hero-image-link:hover .hero-image {
+      transform: scale(1.015);
+      filter: saturate(1.04) contrast(1.02);
     }
-    summary::-webkit-details-marker{display:none}
-    .meta{display:grid;gap:5px}
-    .tag{font-size:12px;color:var(--accent2);font-weight:900;letter-spacing:.08em}
-    .title{font-size:clamp(17px,4.4vw,25px);font-weight:900;letter-spacing:-.04em}
-    .date{font-size:13px;color:var(--muted);font-weight:700}
-    .chev{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(127,159,134,.14);transition:.3s}
-    details[open] .chev{rotate:45deg}
-    .content{
-      max-height:0;overflow:hidden;transition:max-height .42s ease;
-      border-top:1px solid var(--line)
+
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(248, 241, 229, .82);
+      border-bottom: 1px solid var(--line);
     }
-    details[open] .content{max-height:2200px}
-    .songs{display:grid;gap:10px;padding:18px}
-    .song{
-      display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
-      padding:14px;border-radius:20px;background:rgba(255,255,255,.48);border:1px solid rgba(38,52,45,.08)
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 3vw, 24px);
+      padding: 12px 0;
+      flex-wrap: wrap;
     }
-    .songName{font-weight:850;line-height:1.45}
-    .songName small{display:block;color:var(--muted);font-weight:700}
-    .links{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-    footer{padding:36px 0 50px;text-align:center;color:var(--muted);font-size:13px}
-    .hidden{display:none!important}
-    @media(max-width:620px){
-      .nav{align-items:flex-start;flex-direction:column}
-      .menu{justify-content:flex-start}
-      .hero{text-align:left;padding-top:42px}
-      .official{justify-content:flex-start}
-      summary{padding:18px}
-      .song{grid-template-columns:1fr}
-      .links{justify-content:flex-start}
-      .song a{padding:8px 11px}
+
+    .menu a {
+      min-width: 96px;
+      text-align: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      color: var(--wood);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: .08em;
+      background: rgba(255,255,255,.38);
+      border: 1px solid transparent;
+      transition: .25s ease;
+    }
+
+    .menu a:hover {
+      border-color: var(--line);
+      background: rgba(255,250,241,.9);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(74, 56, 32, 0.12);
+    }
+
+    .intro {
+      padding: 52px 0 26px;
+      text-align: center;
+      position: relative;
+    }
+
+    .intro::before,
+    .intro::after {
+      content: "☙";
+      position: absolute;
+      top: 40px;
+      color: rgba(95,108,79,.32);
+      font-size: clamp(34px, 7vw, 70px);
+      transform: rotate(-18deg);
+    }
+
+    .intro::before { left: 4%; }
+    .intro::after { right: 4%; transform: rotate(18deg); }
+
+    .eyebrow {
+      color: var(--wood);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13px;
+      letter-spacing: .22em;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 9vw, 82px);
+      line-height: .95;
+      letter-spacing: .12em;
+      font-weight: 500;
+      color: #6f5436;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      margin: 16px auto 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: clamp(14px, 3.5vw, 18px);
+    }
+
+    .searchBox {
+      margin: 28px auto 8px;
+      max-width: 760px;
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 18px 52px 18px 22px;
+      background: rgba(255,250,241,.9);
+      box-shadow: var(--shadow);
+      font-size: 16px;
+      color: var(--ink);
+      outline: none;
+    }
+
+    input:focus {
+      border-color: rgba(138,103,65,.46);
+      box-shadow: 0 18px 50px rgba(95,108,79,.15);
+    }
+
+    .searchMark {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      translate: 0 -50%;
+      color: var(--wood);
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    section {
+      padding: 30px 0;
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      color: var(--olive);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(25px, 6vw, 40px);
+      letter-spacing: .12em;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    h2 span {
+      font-size: .72em;
+    }
+
+    .accordion {
+      display: grid;
+      gap: 14px;
+    }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: 42px 1fr 34px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .leafIcon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(138,103,65,.10);
+      color: var(--sage);
+      font-size: 22px;
+    }
+
+    .meta {
+      display: grid;
+      gap: 4px;
+    }
+
+    .tag {
+      font-size: 12px;
+      color: var(--wood);
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(17px, 4.4vw, 25px);
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+
+    .date {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .chev {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--wood);
+      background: rgba(95,108,79,.11);
+      transition: .3s ease;
+      font-weight: 900;
+    }
+
+    details[open] .chev {
+      rotate: 45deg;
+      background: rgba(138,103,65,.15);
+    }
+
+    .content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .45s ease;
+      border-top: 1px solid var(--line);
+    }
+
+    details[open] .content {
+      max-height: 2400px;
+    }
+
+    .songs {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .song {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.44);
+      border: 1px solid rgba(92,75,49,.10);
+    }
+
+    .songName {
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .songName small {
+      display: block;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .links {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .song a,
+    .official a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255,250,241,.75);
+      border: 1px solid var(--line);
+      color: var(--wood);
+      font-weight: 850;
+      font-size: 12px;
+      transition: .25s ease;
+      white-space: nowrap;
+    }
+
+    .song a:hover,
+    .official a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(74, 56, 32, 0.13);
+      background: rgba(255,250,241,.98);
+    }
+
+    .official-footer {
+      margin-top: 38px;
+      padding: 42px 0 48px;
+      text-align: center;
+      color: rgba(255,250,241,.92);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,250,241,.16), transparent 32%),
+        linear-gradient(135deg, #6d755a, #8a6741);
+    }
+
+    .official-footer h2 {
+      justify-content: center;
+      color: rgba(255,250,241,.94);
+      font-size: clamp(20px, 5vw, 30px);
+      margin-bottom: 22px;
+    }
+
+    .official {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .official a {
+      min-width: 126px;
+      justify-content: center;
+      color: #5f513d;
+      background: rgba(255,250,241,.88);
+    }
+
+    .copyright {
+      margin-top: 28px;
+      color: rgba(255,250,241,.72);
+      font-size: 13px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .hero-image {
+        height: 210px;
+      }
+
+      .menu {
+        gap: 6px;
+        padding: 10px 0;
+      }
+
+      .menu a {
+        min-width: auto;
+        flex: 1;
+        padding: 10px 8px;
+        font-size: 13px;
+        letter-spacing: .04em;
+      }
+
+      .intro {
+        padding: 40px 0 20px;
+        text-align: left;
+      }
+
+      .intro::before,
+      .intro::after {
+        display: none;
+      }
+
+      h1 {
+        letter-spacing: .08em;
+      }
+
+      summary {
+        grid-template-columns: 34px 1fr 30px;
+        gap: 10px;
+        padding: 17px 15px;
+      }
+
+      .leafIcon {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
+      }
+
+      .song {
+        grid-template-columns: 1fr;
+      }
+
+      .links {
+        justify-content: flex-start;
+      }
+
+      .song a {
+        padding: 8px 11px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="#home">Fujii Kaze <span>DB</span></a>
-      <nav class="menu">
+  <header class="site-header" id="home">
+    <a href="#home" class="hero-image-link" aria-label="Back to Home">
+      <img src="kaze-logo.png" alt="Fujii Kaze Global Discography Home" class="hero-image" />
+    </a>
+
+    <nav class="nav-bar" aria-label="Primary navigation">
+      <div class="wrap menu">
         <a href="#home">Home</a>
         <a href="#albums">Albums</a>
         <a href="#singles">Singles</a>
-      </nav>
-    </div>
+      </div>
+    </nav>
   </header>
 
-  <main id="home" class="wrap">
-    <section class="hero">
-      <div class="eyebrow">GLOBAL ACCORDION DATABASE</div>
-      <h1>Love, freedom,<br>and music.</h1>
-      <p class="lead">藤井風 / Fujii Kaze のアルバム・楽曲を、スマホで一瞬検索できるファン向けミニDB。</p>
-
-      <div class="official">
-        <a href="https://fujiikaze.com/" target="_blank" rel="noopener">🌿 Official Site</a>
-        <a href="https://www.youtube.com/channel/UCNIy6zQyP7SuLEIaiwymfUA" target="_blank" rel="noopener">▶ YouTube</a>
-        <a href="https://www.instagram.com/fujiikaze/" target="_blank" rel="noopener">◎ Instagram</a>
-        <a href="https://open.spotify.com/artist/6bDWAcdtVR3WHz2xtiIPUi" target="_blank" rel="noopener">♫ Spotify</a>
-      </div>
+  <main class="wrap">
+    <section class="intro">
+      <div class="eyebrow">THE GLOBAL DISCOGRAPHY</div>
+      <h1>Fujii Kaze</h1>
+      <p class="lead">藤井風 / Fujii Kaze のアルバム・楽曲を、スマホで一瞬検索できるファン向けグローバル・アコーディオンDB。</p>
 
       <div class="searchBox">
         <input id="search" type="search" placeholder="Search songs / albums... 例：Kirari, まつり, Prema" autocomplete="off" />
+        <span class="searchMark">⌕</span>
       </div>
     </section>
 
     <section id="albums">
-      <h2>Albums</h2>
+      <h2><span>♫</span> Albums</h2>
       <div class="accordion" id="albumList"></div>
     </section>
 
     <section id="singles">
-      <h2>Digital Singles / Other</h2>
+      <h2><span>☙</span> Singles / Other</h2>
       <div class="accordion" id="singleList"></div>
     </section>
   </main>
 
-  <footer>
+  <footer class="official-footer">
     <div class="wrap">
-      <strong>Official Links</strong><br><br>
+      <h2>Official Links</h2>
       <div class="official">
-        <a href="https://fujiikaze.com/" target="_blank" rel="noopener">Official Site</a>
-        <a href="https://www.youtube.com/channel/UCNIy6zQyP7SuLEIaiwymfUA" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.instagram.com/fujiikaze/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://fujiikaze.com/" target="_blank" rel="noopener">☙ Official Site</a>
+        <a href="https://www.youtube.com/channel/UCNIy6zQyP7SuLEIaiwymfUA" target="_blank" rel="noopener">▶ YouTube</a>
+        <a href="https://www.instagram.com/fujiikaze/" target="_blank" rel="noopener">◎ Instagram</a>
+        <a href="https://open.spotify.com/artist/6bDWAcdtVR3WHz2xtiIPUi" target="_blank" rel="noopener">♫ Spotify</a>
       </div>
+      <div class="copyright">© Fujii Kaze Global Accordion DB</div>
     </div>
   </footer>
 
   <script>
     const albums = [
-      {cat:"3rd Album", title:"Prema", date:"2025.09.05", songs:["Casket Girl","I Need U Back","Hachiko","Love Like This","Prema","It Ain't Over","You","Okay, Goodbye","Forever Young"]},
-      {cat:"2nd Album", title:"LOVE ALL COVER ALL", date:"2022.03.23", songs:["Sunny","No Tears Left To Cry","Hot Stuff","Sorry","Good As Hell","Just the Two of Us","Weak","Overprotected","Teenage Dream","Eh, Eh","Circles"]},
-      {cat:"2nd Album", title:"LOVE ALL SERVE ALL", date:"2022.03.23", songs:["きらり (Kirari)","まつり (Matsuri)","へでもねーよ (Hedemo Ne-Yo)","やば。 (Yaba)","燃えよ (MO-E-YO)","ガーデン (Garden)","Damn","ロンリーラプソディ (Lonely Rhapsody)","それでは、 (Then,)","青春病 (Seishun Sick)","旅路 (Tabiji)"]},
-      {cat:"1st Album", title:"LOVE ALL COVER ALL", date:"2020.05.20", songs:["Close to You","Shape of You","Back Stabbers","Alfie","Be Alright","Beat It","Don't Let Me Be Misunderstood","My Eyes Adored You","Shake It Off","Stronger Than Me","Time After Time"]},
-      {cat:"1st Album", title:"HELP EVER HURT NEVER", date:"2020.05.20", songs:["何なんw (Nan-Nan)","もうええわ (Mo-Eh-Wa)","優しさ (Yasashisa)","キリがないから (Kiri Going On)","罪の香り (Tsumi no Kaori)","調子のっちゃって (Choji Nocchatte)","特にない (Tokuninai)","死ぬのがいいわ (Shinunoga E-Wa)","風よ (Kazeyo)","さよならべいべ (Sayonara Baby)","帰ろう (Kaerou)"]}
+      {
+        cat: "3rd Album",
+        title: "Prema",
+        date: "2025.09.05",
+        songs: [
+          "Casket Girl",
+          "I Need U Back",
+          "Hachiko",
+          "Love Like This",
+          "Prema",
+          "It Ain't Over",
+          "You",
+          "Okay, Goodbye",
+          "Forever Young"
+        ]
+      },
+      {
+        cat: "2nd Album",
+        title: "LOVE ALL COVER ALL",
+        date: "2022.03.23",
+        songs: [
+          "Sunny",
+          "No Tears Left To Cry",
+          "Hot Stuff",
+          "Sorry",
+          "Good As Hell",
+          "Just the Two of Us",
+          "Weak",
+          "Overprotected",
+          "Teenage Dream",
+          "Eh, Eh",
+          "Circles"
+        ]
+      },
+      {
+        cat: "2nd Album",
+        title: "LOVE ALL SERVE ALL",
+        date: "2022.03.23",
+        songs: [
+          "きらり (Kirari)",
+          "まつり (Matsuri)",
+          "へでもねーよ (Hedemo Ne-Yo)",
+          "やば。 (Yaba)",
+          "燃えよ (MO-E-YO)",
+          "ガーデン (Garden)",
+          "Damn",
+          "ロンリーラプソディ (Lonely Rhapsody)",
+          "それでは、 (Then,)",
+          "青春病 (Seishun Sick)",
+          "旅路 (Tabiji)"
+        ]
+      },
+      {
+        cat: "1st Album",
+        title: "LOVE ALL COVER ALL",
+        date: "2020.05.20",
+        songs: [
+          "Close to You",
+          "Shape of You",
+          "Back Stabbers",
+          "Alfie",
+          "Be Alright",
+          "Beat It",
+          "Don't Let Me Be Misunderstood",
+          "My Eyes Adored You",
+          "Shake It Off",
+          "Stronger Than Me",
+          "Time After Time"
+        ]
+      },
+      {
+        cat: "1st Album",
+        title: "HELP EVER HURT NEVER",
+        date: "2020.05.20",
+        songs: [
+          "何なんw (Nan-Nan)",
+          "もうええわ (Mo-Eh-Wa)",
+          "優しさ (Yasashisa)",
+          "キリがないから (Kiri Going On)",
+          "罪の香り (Tsumi no Kaori)",
+          "調子のっちゃって (Choji Nocchatte)",
+          "特にない (Tokuninai)",
+          "死ぬのがいいわ (Shinunoga E-Wa)",
+          "風よ (Kazeyo)",
+          "さよならべいべ (Sayonara Baby)",
+          "帰ろう (Kaerou)"
+        ]
+      }
     ];
 
     const singles = [
-      {cat:"Digital Single", title:"Love Like This", date:"2025.08.01", songs:["Love Like This"]},
-      {cat:"Digital Single", title:"Hachiko", date:"2025.06.13", songs:["Hachiko"]},
-      {cat:"Digital Single", title:"真っ白 (Mashiro)", date:"2025.02.28", songs:["真っ白 (Mashiro)"]},
-      {cat:"Digital Single", title:"Feelin’ Go(o)d", date:"2024.07.26", songs:["Feelin’ Go(o)d"]},
-      {cat:"Digital Single", title:"満ちてゆく (Overflowing)", date:"2024.03.15", songs:["満ちてゆく (Overflowing)"]},
-      {cat:"Digital Single", title:"Workin’ Hard", date:"2023.08.25", songs:["Workin’ Hard"]},
-      {cat:"Digital Single", title:"grace", date:"2022.10.10", songs:["grace"]},
-      {cat:"Digital Single", title:"damn", date:"2022.09.30", songs:["damn"]},
-      {cat:"Digital Single", title:"まつり (Matsuri)", date:"2022.03.20", songs:["まつり (Matsuri)"]},
-      {cat:"Digital Single", title:"燃えよ (MO-E-YO)", date:"2021.09.04", songs:["燃えよ (MO-E-YO)"]},
-      {cat:"Digital Single", title:"きらり (Kirari)", date:"2021.05.03", songs:["きらり (Kirari)"]},
-      {cat:"Digital Single", title:"旅路 (Tabiji)", date:"2021.03.01", songs:["旅路 (Tabiji)"]},
-      {cat:"Digital Single", title:"へでもねーよ (Hedemo Ne-Yo)", date:"2020.10.30", songs:["へでもねーよ (Hedemo Ne-Yo)"]},
-      {cat:"Digital Single", title:"青春病 (Seishun Sick)", date:"2020.10.30", songs:["青春病 (Seishun Sick)"]},
-      {cat:"Digital Single", title:"キリがないから (Kiri Going On)", date:"2020.05.15", songs:["キリがないから (Kiri Going On)"]},
-      {cat:"Digital Single", title:"優しさ (Yasashisa)", date:"2020.04.17", songs:["優しさ (Yasashisa)"]},
-      {cat:"Digital Single", title:"もうええわ (Mo-Eh-Wa)", date:"2019.12.24", songs:["もうええわ (Mo-Eh-Wa)"]},
-      {cat:"Digital Single", title:"何なんw (Nan-Nan)", date:"2019.11.18", songs:["何なんw (Nan-Nan)"]}
+      {
+        cat: "Digital Singles / Other",
+        title: "Digital Singles / Other",
+        date: "2019 - 2025",
+        songs: [
+          "Love Like This 2025.08.01",
+          "Hachiko 2025.06.13",
+          "真っ白 (Mashiro) 2025.02.28",
+          "Feelin’ Go(o)d 2024.07.26",
+          "満ちてゆく (Overflowing) 2024.03.15",
+          "Workin’ Hard 2023.08.25",
+          "grace 2022.10.10",
+          "damn 2022.09.30",
+          "まつり (Matsuri) 2022.03.20",
+          "燃えよ (MO-E-YO) 2021.09.04",
+          "きらり (Kirari) 2021.05.03",
+          "旅路 (Tabiji) 2021.03.01",
+          "へでもねーよ (Hedemo Ne-Yo) 2020.10.30",
+          "青春病 (Seishun Sick) 2020.10.30",
+          "キリがないから (Kiri Going On) 2020.05.15",
+          "優しさ (Yasashisa) 2020.04.17",
+          "もうええわ (Mo-Eh-Wa) 2019.12.24",
+          "何なんw (Nan-Nan) 2019.11.18"
+        ]
+      }
     ];
 
-    const yt = song => `https://www.youtube.com/results?search_query=${encodeURIComponent("Fujii Kaze " + song + " official")}`;
-    const sp = song => `https://open.spotify.com/search/${encodeURIComponent("Fujii Kaze " + song)}`;
+    const spotifySearch = song => `https://open.spotify.com/search/${encodeURIComponent("Fujii Kaze " + song.replace(/\d{4}\.\d{2}\.\d{2}/g, ""))}`;
+    const youtubeSearch = song => `https://www.youtube.com/results?search_query=${encodeURIComponent("Fujii Kaze " + song.replace(/\d{4}\.\d{2}\.\d{2}/g, "") + " official")}`;
 
-    function card(item){
+    function createCard(item) {
+      const text = `${item.cat} ${item.title} ${item.date} ${item.songs.join(" ")}`.toLowerCase();
+
       return `
-        <details class="item" data-text="${(item.cat+' '+item.title+' '+item.date+' '+item.songs.join(' ')).toLowerCase()}">
+        <details class="item" data-text="${text}">
           <summary>
+            <span class="leafIcon">☙</span>
             <span class="meta">
               <span class="tag">${item.cat}</span>
               <span class="title">${item.title}</span>
@@ -193,39 +654,51 @@
           </summary>
           <div class="content">
             <div class="songs">
-              ${item.songs.map(s => `
-                <div class="song" data-song="${s.toLowerCase()}">
-                  <div class="songName">${s}<small>Fujii Kaze / 藤井風</small></div>
+              ${item.songs.map(song => `
+                <div class="song">
+                  <div class="songName">
+                    ${song}
+                    <small>Fujii Kaze / 藤井風</small>
+                  </div>
                   <div class="links">
-                    <a href="${yt(s)}" target="_blank" rel="noopener">▶ Official / YouTube</a>
-                    <a href="${sp(s)}" target="_blank" rel="noopener">♫ Spotify</a>
+                    <a href="${youtubeSearch(song)}" target="_blank" rel="noopener">▶ YouTube</a>
+                    <a href="${spotifySearch(song)}" target="_blank" rel="noopener">♫ Spotify</a>
                   </div>
                 </div>
               `).join("")}
             </div>
           </div>
-        </details>`;
+        </details>
+      `;
     }
 
-    albumList.innerHTML = albums.map(card).join("");
-    singleList.innerHTML = singles.map(card).join("");
+    document.getElementById("albumList").innerHTML = albums.map(createCard).join("");
+    document.getElementById("singleList").innerHTML = singles.map(createCard).join("");
 
     const search = document.getElementById("search");
     const allItems = [...document.querySelectorAll(".item")];
 
     search.addEventListener("input", e => {
       const q = e.target.value.trim().toLowerCase();
-      allItems.forEach(d => {
-        d.open = false;
-        const hit = !q || d.dataset.text.includes(q);
-        d.classList.toggle("hidden", !hit);
-        if(q && hit) d.open = true;
+
+      allItems.forEach(item => {
+        item.open = false;
+        item.classList.remove("hidden");
+
+        if (!q) return;
+
+        const hit = item.dataset.text.includes(q);
+        item.classList.toggle("hidden", !hit);
+        if (hit) item.open = true;
       });
     });
 
     search.addEventListener("search", () => {
-      if(!search.value){
-        allItems.forEach(d => { d.open = false; d.classList.remove("hidden"); });
+      if (!search.value) {
+        allItems.forEach(item => {
+          item.open = false;
+          item.classList.remove("hidden");
+        });
       }
     });
   </script>
