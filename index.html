@@ -21,7 +21,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -35,15 +34,8 @@
       min-height: 100vh;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .wrap {
-      width: min(980px, 92vw);
-      margin: auto;
-    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(980px, 92vw); margin: auto; }
 
     .site-header {
       background: linear-gradient(180deg, rgba(255,250,241,.94), rgba(234,220,198,.88));
@@ -192,9 +184,7 @@
       pointer-events: none;
     }
 
-    section {
-      padding: 30px 0;
-    }
+    section { padding: 30px 0; }
 
     h2 {
       display: flex;
@@ -209,14 +199,8 @@
       text-transform: uppercase;
     }
 
-    h2 span {
-      font-size: .72em;
-    }
-
-    .accordion {
-      display: grid;
-      gap: 14px;
-    }
+    h2 span { font-size: .72em; }
+    .accordion { display: grid; gap: 14px; }
 
     details {
       background: var(--card);
@@ -236,9 +220,7 @@
       align-items: center;
     }
 
-    summary::-webkit-details-marker {
-      display: none;
-    }
+    summary::-webkit-details-marker { display: none; }
 
     .leafIcon {
       width: 42px;
@@ -251,10 +233,7 @@
       font-size: 22px;
     }
 
-    .meta {
-      display: grid;
-      gap: 4px;
-    }
+    .meta { display: grid; gap: 4px; }
 
     .tag {
       font-size: 12px;
@@ -301,9 +280,7 @@
       border-top: 1px solid var(--line);
     }
 
-    details[open] .content {
-      max-height: 2400px;
-    }
+    details[open] .content { max-height: 2600px; }
 
     .songs {
       display: grid;
@@ -401,14 +378,10 @@
       font-size: 13px;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     @media (max-width: 640px) {
-      .hero-image {
-        height: 210px;
-      }
+      .hero-image { height: 210px; }
 
       .menu {
         gap: 6px;
@@ -429,13 +402,9 @@
       }
 
       .intro::before,
-      .intro::after {
-        display: none;
-      }
+      .intro::after { display: none; }
 
-      h1 {
-        letter-spacing: .08em;
-      }
+      h1 { letter-spacing: .08em; }
 
       summary {
         grid-template-columns: 34px 1fr 30px;
@@ -449,17 +418,9 @@
         font-size: 18px;
       }
 
-      .song {
-        grid-template-columns: 1fr;
-      }
-
-      .links {
-        justify-content: flex-start;
-      }
-
-      .song a {
-        padding: 8px 11px;
-      }
+      .song { grid-template-columns: 1fr; }
+      .links { justify-content: flex-start; }
+      .song a { padding: 8px 11px; }
     }
   </style>
 </head>
@@ -522,15 +483,15 @@
         title: "Prema",
         date: "2025.09.05",
         songs: [
-          "Casket Girl",
-          "I Need U Back",
-          "Hachiko",
-          "Love Like This",
-          "Prema",
-          "It Ain't Over",
-          "You",
-          "Okay, Goodbye",
-          "Forever Young"
+          { name: "Casket Girl", spotify: "https://open.spotify.com/track/46LSraL1efyLHbM5DehGtN" },
+          { name: "I Need U Back", spotify: "https://open.spotify.com/track/2D7Bqzfa2pJqa0LUftrVgx" },
+          { name: "Hachiko", spotify: "https://open.spotify.com/track/3Aj0zsny1zlTLevRxfEEKc" },
+          { name: "Love Like This", spotify: "https://open.spotify.com/track/45uzEq3hAOy8uayrvDLY2C" },
+          { name: "Prema", spotify: "https://open.spotify.com/track/0IByNT868RxZwmcj1rQgno" },
+          { name: "It Ain't Over", spotify: "https://open.spotify.com/track/7xWKGIFGLxBJAyGSus7BOJ" },
+          { name: "You", spotify: "https://open.spotify.com/track/2vQhYhGSBBamRhhJeWprr1" },
+          { name: "Okay, Goodbye", spotify: "https://open.spotify.com/track/1Vw0JiY6Jk8vCypHzb3fo4" },
+          { name: "Forever Young", spotify: "https://open.spotify.com/track/3K0Xr4N0ccBKqBBHDARIFy" }
         ]
       },
       {
@@ -538,17 +499,17 @@
         title: "LOVE ALL COVER ALL",
         date: "2022.03.23",
         songs: [
-          "Sunny",
-          "No Tears Left To Cry",
-          "Hot Stuff",
-          "Sorry",
-          "Good As Hell",
-          "Just the Two of Us",
-          "Weak",
-          "Overprotected",
-          "Teenage Dream",
-          "Eh, Eh",
-          "Circles"
+          { name: "Sunny", spotify: "https://open.spotify.com/search/Sunny%20Fujii%20Kaze/tracks" },
+          { name: "No Tears Left To Cry", spotify: "https://open.spotify.com/track/2ggGdrhcOlUh7BpirycPf4" },
+          { name: "Hot Stuff", spotify: "https://open.spotify.com/track/2JS2MXOcqKr8zZo8cbsOfy" },
+          { name: "Sorry", spotify: "https://open.spotify.com/track/6tbSgMKlQ31izXvorTATrn" },
+          { name: "Good As Hell", spotify: "https://open.spotify.com/track/1Ne4bYb1ZoGShX3Q0ORoY7" },
+          { name: "Just the Two of Us", spotify: "https://open.spotify.com/track/25rJtfnU4uqPj4iD96JGMv" },
+          { name: "Weak", spotify: "https://open.spotify.com/search/Weak%20Fujii%20Kaze/tracks" },
+          { name: "Overprotected", spotify: "https://open.spotify.com/track/0Ogz120T98XLakKbkK0uZe" },
+          { name: "Teenage Dream", spotify: "https://open.spotify.com/track/0pGCX84PwhZJvj1KXO11HH" },
+          { name: "Eh, Eh", spotify: "https://open.spotify.com/search/Eh%20Eh%20Fujii%20Kaze/tracks" },
+          { name: "Circles", spotify: "https://open.spotify.com/track/12OzpDDrf5OSwymIJKaRuf" }
         ]
       },
       {
@@ -556,17 +517,17 @@
         title: "LOVE ALL SERVE ALL",
         date: "2022.03.23",
         songs: [
-          "きらり (Kirari)",
-          "まつり (Matsuri)",
-          "へでもねーよ (Hedemo Ne-Yo)",
-          "やば。 (Yaba)",
-          "燃えよ (MO-E-YO)",
-          "ガーデン (Garden)",
-          "Damn",
-          "ロンリーラプソディ (Lonely Rhapsody)",
-          "それでは、 (Then,)",
-          "青春病 (Seishun Sick)",
-          "旅路 (Tabiji)"
+          { name: "きらり (Kirari)", spotify: "https://open.spotify.com/track/7nhXN2H8h3i2PaHPXb6FO3" },
+          { name: "まつり (Matsuri)", spotify: "https://open.spotify.com/track/7AMGgAPFczs3wJgMqu6Eqi" },
+          { name: "へでもねーよ (Hedemo Ne-Yo)", spotify: "https://open.spotify.com/track/4Lrz9Fg8L1yncuCjjKjD4D" },
+          { name: "やば。 (Yaba)", spotify: "https://open.spotify.com/track/3DyekzXIo7Or5Krd0eAmo5" },
+          { name: "燃えよ (MO-E-YO)", spotify: "https://open.spotify.com/track/2fMdT98JpheoBh6t8DBSjI" },
+          { name: "ガーデン (Garden)", spotify: "https://open.spotify.com/track/2vMc8rqFmqs7RFi8NDx0CJ" },
+          { name: "Damn", spotify: "https://open.spotify.com/track/7dNxxkapvf5eRkw24PHSpy" },
+          { name: "ロンリーラプソディ (Lonely Rhapsody)", spotify: "https://open.spotify.com/track/2Q0LpnMDXazZk49AWEiHE2" },
+          { name: "それでは、 (Then,)", spotify: "https://open.spotify.com/track/4Y9QwoUwo9blH9R9C5DCnk" },
+          { name: "青春病 (Seishun Sick)", spotify: "https://open.spotify.com/track/2PDtvT5DEamQTM5qeiTDsR" },
+          { name: "旅路 (Tabiji)", spotify: "https://open.spotify.com/track/6SyvPeEmj4yBblsKIyiGqT" }
         ]
       },
       {
@@ -574,17 +535,17 @@
         title: "LOVE ALL COVER ALL",
         date: "2020.05.20",
         songs: [
-          "Close to You",
-          "Shape of You",
-          "Back Stabbers",
-          "Alfie",
-          "Be Alright",
-          "Beat It",
-          "Don't Let Me Be Misunderstood",
-          "My Eyes Adored You",
-          "Shake It Off",
-          "Stronger Than Me",
-          "Time After Time"
+          { name: "Close to You", spotify: "https://open.spotify.com/track/02QcM5pBEymkl6gXb4RHex" },
+          { name: "Shape of You", spotify: "https://open.spotify.com/track/3VcT4kpalhVmwBvTj9WUwW" },
+          { name: "Back Stabbers", spotify: "https://open.spotify.com/track/6w0aitSQVR7Zo8ZN5aH6ki" },
+          { name: "Alfie", spotify: "https://open.spotify.com/search/Alfie%20Fujii%20Kaze/tracks" },
+          { name: "Be Alright", spotify: "https://open.spotify.com/track/0Roq5A8tnn2HgarMwUWZPI" },
+          { name: "Beat It", spotify: "https://open.spotify.com/track/6FdivTVszyP1FNECK5NtKi" },
+          { name: "Don't Let Me Be Misunderstood", spotify: "https://open.spotify.com/search/Don't%20Let%20Me%20Be%20Misunderstood%20Fujii%20Kaze/tracks" },
+          { name: "My Eyes Adored You", spotify: "https://open.spotify.com/track/1zBtOH6KLWwbLX4lSJc1qY" },
+          { name: "Shake It Off", spotify: "https://open.spotify.com/track/2PEERoxfcVUZlKKiUfNlnW" },
+          { name: "Stronger Than Me", spotify: "https://open.spotify.com/track/2uilgK5ztct747wpqBG7S0" },
+          { name: "Time After Time", spotify: "https://open.spotify.com/track/2XBjTCpuKYxJ0C4UUDxcZL" }
         ]
       },
       {
@@ -592,17 +553,17 @@
         title: "HELP EVER HURT NEVER",
         date: "2020.05.20",
         songs: [
-          "何なんw (Nan-Nan)",
-          "もうええわ (Mo-Eh-Wa)",
-          "優しさ (Yasashisa)",
-          "キリがないから (Kiri Going On)",
-          "罪の香り (Tsumi no Kaori)",
-          "調子のっちゃって (Choji Nocchatte)",
-          "特にない (Tokuninai)",
-          "死ぬのがいいわ (Shinunoga E-Wa)",
-          "風よ (Kazeyo)",
-          "さよならべいべ (Sayonara Baby)",
-          "帰ろう (Kaerou)"
+          { name: "何なんw (Nan-Nan)", spotify: "https://open.spotify.com/track/2CbGuO0LtVvbh3umN3mDwM" },
+          { name: "もうええわ (Mo-Eh-Wa)", spotify: "https://open.spotify.com/track/1JRNrJKTQhfvxII8kkIcAQ" },
+          { name: "優しさ (Yasashisa)", spotify: "https://open.spotify.com/track/57u1FaZlztApkcT5x5XNuD" },
+          { name: "キリがないから (Kiri Going On)", spotify: "https://open.spotify.com/track/7i5pytF8KaId51lIzatwdg" },
+          { name: "罪の香り (Tsumi no Kaori)", spotify: "https://open.spotify.com/track/7r9v0CLTunOwlbvdOFFgZo" },
+          { name: "調子のっちゃって (Choji Nocchatte)", spotify: "https://open.spotify.com/track/74Zrps4gc3qTF49oKpm6zF" },
+          { name: "特にない (Tokuninai)", spotify: "https://open.spotify.com/track/6AJppuCk5EE86paOdDI4yL" },
+          { name: "死ぬのがいいわ (Shinunoga E-Wa)", spotify: "https://open.spotify.com/track/0o9zmvc5f3EFApU52PPIyW" },
+          { name: "風よ (Kazeyo)", spotify: "https://open.spotify.com/track/5cpOWNmI84MuUCeciETO64" },
+          { name: "さよならべいべ (Sayonara Baby)", spotify: "https://open.spotify.com/search/Sayonara%20Baby%20Fujii%20Kaze/tracks" },
+          { name: "帰ろう (Kaerou)", spotify: "https://open.spotify.com/track/26e8ujjSpBAHhIY2ymLUT1" }
         ]
       }
     ];
@@ -613,33 +574,39 @@
         title: "Digital Singles / Other",
         date: "2019 - 2025",
         songs: [
-          "Love Like This 2025.08.01",
-          "Hachiko 2025.06.13",
-          "真っ白 (Mashiro) 2025.02.28",
-          "Feelin’ Go(o)d 2024.07.26",
-          "満ちてゆく (Overflowing) 2024.03.15",
-          "Workin’ Hard 2023.08.25",
-          "grace 2022.10.10",
-          "damn 2022.09.30",
-          "まつり (Matsuri) 2022.03.20",
-          "燃えよ (MO-E-YO) 2021.09.04",
-          "きらり (Kirari) 2021.05.03",
-          "旅路 (Tabiji) 2021.03.01",
-          "へでもねーよ (Hedemo Ne-Yo) 2020.10.30",
-          "青春病 (Seishun Sick) 2020.10.30",
-          "キリがないから (Kiri Going On) 2020.05.15",
-          "優しさ (Yasashisa) 2020.04.17",
-          "もうええわ (Mo-Eh-Wa) 2019.12.24",
-          "何なんw (Nan-Nan) 2019.11.18"
+          { name: "Love Like This 2025.08.01", spotify: "https://open.spotify.com/track/2tMT6ljz6rXtQpFIqoo7Em" },
+          { name: "Hachiko 2025.06.13", spotify: "https://open.spotify.com/track/3Aj0zsny1zlTLevRxfEEKc" },
+          { name: "真っ白 (Mashiro) 2025.02.28", spotify: "https://open.spotify.com/search/%E7%9C%9F%E3%81%A3%E7%99%BD%20Fujii%20Kaze/tracks" },
+          { name: "Feelin’ Go(o)d 2024.07.26", spotify: "https://open.spotify.com/search/Feelin%20Good%20Fujii%20Kaze/tracks" },
+          { name: "満ちてゆく (Overflowing) 2024.03.15", spotify: "https://open.spotify.com/track/3Ez9uxIM4nwbAZRAdJvBxS" },
+          { name: "Workin’ Hard 2023.08.25", spotify: "https://open.spotify.com/search/Workin%20Hard%20Fujii%20Kaze/tracks" },
+          { name: "grace 2022.10.10", spotify: "https://open.spotify.com/search/grace%20Fujii%20Kaze/tracks" },
+          { name: "damn 2022.09.30", spotify: "https://open.spotify.com/track/7dNxxkapvf5eRkw24PHSpy" },
+          { name: "まつり (Matsuri) 2022.03.20", spotify: "https://open.spotify.com/track/7AMGgAPFczs3wJgMqu6Eqi" },
+          { name: "燃えよ (MO-E-YO) 2021.09.04", spotify: "https://open.spotify.com/track/2fMdT98JpheoBh6t8DBSjI" },
+          { name: "きらり (Kirari) 2021.05.03", spotify: "https://open.spotify.com/track/7nhXN2H8h3i2PaHPXb6FO3" },
+          { name: "旅路 (Tabiji) 2021.03.01", spotify: "https://open.spotify.com/track/1EM9pvygHqQm03as6sxLg9" },
+          { name: "へでもねーよ (Hedemo Ne-Yo) 2020.10.30", spotify: "https://open.spotify.com/search/Hedemo%20Ne-Yo%20Fujii%20Kaze/tracks" },
+          { name: "青春病 (Seishun Sick) 2020.10.30", spotify: "https://open.spotify.com/search/Seishun%20Sick%20Fujii%20Kaze/tracks" },
+          { name: "キリがないから (Kiri Going On) 2020.05.15", spotify: "https://open.spotify.com/track/0puZUrjhNhWl98RdE7YfNM" },
+          { name: "優しさ (Yasashisa) 2020.04.17", spotify: "https://open.spotify.com/track/57u1FaZlztApkcT5x5XNuD" },
+          { name: "もうええわ (Mo-Eh-Wa) 2019.12.24", spotify: "https://open.spotify.com/track/1JRNrJKTQhfvxII8kkIcAQ" },
+          { name: "何なんw (Nan-Nan) 2019.11.18", spotify: "https://open.spotify.com/track/2CbGuO0LtVvbh3umN3mDwM" }
         ]
       }
     ];
 
-    const spotifySearch = song => `https://open.spotify.com/search/${encodeURIComponent("Fujii Kaze " + song.replace(/\d{4}\.\d{2}\.\d{2}/g, ""))}`;
-    const youtubeSearch = song => `https://www.youtube.com/results?search_query=${encodeURIComponent("Fujii Kaze " + song.replace(/\d{4}\.\d{2}\.\d{2}/g, "") + " official")}`;
+    const cleanSongTitle = song =>
+      song
+        .replace(/\d{4}\.\d{2}\.\d{2}/g, "")
+        .replace(/\(.+?\)/g, "")
+        .trim();
+
+    const youtubeSearch = song =>
+      `https://www.youtube.com/results?search_query=${encodeURIComponent("Fujii Kaze " + cleanSongTitle(song) + " official")}`;
 
     function createCard(item) {
-      const text = `${item.cat} ${item.title} ${item.date} ${item.songs.join(" ")}`.toLowerCase();
+      const text = `${item.cat} ${item.title} ${item.date} ${item.songs.map(song => song.name).join(" ")}`.toLowerCase();
 
       return `
         <details class="item" data-text="${text}">
@@ -657,12 +624,12 @@
               ${item.songs.map(song => `
                 <div class="song">
                   <div class="songName">
-                    ${song}
+                    ${song.name}
                     <small>Fujii Kaze / 藤井風</small>
                   </div>
                   <div class="links">
-                    <a href="${youtubeSearch(song)}" target="_blank" rel="noopener">▶ YouTube</a>
-                    <a href="${spotifySearch(song)}" target="_blank" rel="noopener">♫ Spotify</a>
+                    <a href="${youtubeSearch(song.name)}" target="_blank" rel="noopener">▶ YouTube</a>
+                    <a href="${song.spotify}" target="_blank" rel="noopener">♫ Spotify</a>
                   </div>
                 </div>
               `).join("")}
