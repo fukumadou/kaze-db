@@ -1,673 +1,768 @@
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fujii Kaze Global Accordion DB</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fujii Kaze Global Discography</title>
   <style>
-    :root {
-      --cream: #f8f1e5;
-      --sand: #eadcc6;
-      --linen: #fffaf1;
-      --sage: #7d8b68;
-      --olive: #5f6c4f;
-      --wood: #8a6741;
-      --ink: #2d2a22;
-      --muted: #776d5e;
-      --line: rgba(92, 75, 49, 0.18);
-      --card: rgba(255, 250, 241, 0.78);
-      --shadow: 0 18px 50px rgba(74, 56, 32, 0.13);
-      --radius: 28px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
+    /* ==========================================
+       🎨 スマホ対応（レスポンシブ）CSS
+       ========================================== */
+    
+    /* 全体の基本設定 */
     body {
       margin: 0;
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Hiragino Sans", sans-serif;
-      background:
-        radial-gradient(circle at 12% 18%, rgba(125,139,104,.18), transparent 30%),
-        radial-gradient(circle at 88% 8%, rgba(138,103,65,.18), transparent 34%),
-        linear-gradient(135deg, var(--cream), #edf1e4 58%, #f7ead8);
-      min-height: 100vh;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fcfbfa; /* 陶器の背景に馴染む柔らかい白 */
+      color: #333;
     }
 
-    a { color: inherit; text-decoration: none; }
-    .wrap { width: min(980px, 92vw); margin: auto; }
-
+    /* 1. ヘッダー（一番上のエリア）全体の調整 */
     .site-header {
-      background: linear-gradient(180deg, rgba(255,250,241,.94), rgba(234,220,198,.88));
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 8px 30px rgba(74, 56, 32, 0.08);
-    }
-
-    .hero-image-link {
-      display: block;
-      width: 100%;
-      line-height: 0;
-      overflow: hidden;
-      background: #d7c0a0;
-    }
-
-    .hero-image {
-      display: block;
-      width: 100%;
-      height: clamp(180px, 34vw, 430px);
-      object-fit: cover;
-      object-position: center;
-      transition: transform .55s ease, filter .55s ease;
-    }
-
-    .hero-image-link:hover .hero-image {
-      transform: scale(1.015);
-      filter: saturate(1.04) contrast(1.02);
-    }
-
-    .nav-bar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      backdrop-filter: blur(18px);
-      background: rgba(248, 241, 229, .82);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .menu {
       display: flex;
+      flex-direction: column; /* スマホでは縦並びにする */
       align-items: center;
+      padding: 20px 10px;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    /* 2. ロゴ画像リンクの設定 */
+    .logo-link {
+      display: inline-block;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+      max-width: 100%;
+      text-align: center;
+    }
+    
+    /* タップしたときに少し透明にして「ボタン感」を出す */
+    .logo-link:hover, .logo-link:active {
+      opacity: 0.8;
+    }
+
+    /* 3. ロゴ画像のサイズ調整（スマホでも絶対にはみ出さない） */
+    .header-logo-img {
+      max-width: 100%;
+      height: auto;
+      max-height: 250px; /* パソコン画面で大きくなりすぎないように制限 */
+      object-fit: contain;
+    }
+
+    /* 4. 英語ナビゲーションメニューの配置 */
+    .header-nav {
+      display: flex;
+      flex-wrap: wrap; /* 画面が狭いときは自動で折り返す */
       justify-content: center;
-      gap: clamp(8px, 3vw, 24px);
-      padding: 12px 0;
-      flex-wrap: wrap;
+      gap: 15px;      /* ボタン同士の程よいスキマ */
+      margin-top: 5px;
+      padding: 0;
     }
 
-    .menu a {
-      min-width: 96px;
-      text-align: center;
-      padding: 10px 18px;
-      border-radius: 999px;
-      color: var(--wood);
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 700;
-      letter-spacing: .08em;
-      background: rgba(255,255,255,.38);
-      border: 1px solid transparent;
-      transition: .25s ease;
-    }
-
-    .menu a:hover {
-      border-color: var(--line);
-      background: rgba(255,250,241,.9);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(74, 56, 32, 0.12);
-    }
-
-    .intro {
-      padding: 52px 0 26px;
-      text-align: center;
-      position: relative;
-    }
-
-    .intro::before,
-    .intro::after {
-      content: "☙";
-      position: absolute;
-      top: 40px;
-      color: rgba(95,108,79,.32);
-      font-size: clamp(34px, 7vw, 70px);
-      transform: rotate(-18deg);
-    }
-
-    .intro::before { left: 4%; }
-    .intro::after { right: 4%; transform: rotate(18deg); }
-
-    .eyebrow {
-      color: var(--wood);
-      font-family: Georgia, "Times New Roman", serif;
+    /* メニューボタン単体の見た目 */
+    .nav-item {
+      text-decoration: none;
+      color: #4a4a4a;
       font-size: 13px;
-      letter-spacing: .22em;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(38px, 9vw, 82px);
-      line-height: .95;
-      letter-spacing: .12em;
       font-weight: 500;
-      color: #6f5436;
-      text-transform: none;
+      letter-spacing: 0.1em;
+      padding: 5px 8px;
     }
 
-    .lead {
-      margin: 16px auto 0;
-      max-width: 720px;
-      color: var(--muted);
-      line-height: 1.9;
-      font-size: clamp(14px, 3.5vw, 18px);
+    /* 現在いるページのメニューを強調（HOMEの下線） */
+    .nav-item.active {
+      font-weight: bold;
+      border-bottom: 2px solid #4a4a4a;
     }
 
-    .searchBox {
-      margin: 28px auto 8px;
-      max-width: 760px;
-      position: relative;
-    }
-
-    input {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 18px 52px 18px 22px;
-      background: rgba(255,250,241,.9);
-      box-shadow: var(--shadow);
-      font-size: 16px;
-      color: var(--ink);
-      outline: none;
-    }
-
-    input:focus {
-      border-color: rgba(138,103,65,.46);
-      box-shadow: 0 18px 50px rgba(95,108,79,.15);
-    }
-
-    .searchMark {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      translate: 0 -50%;
-      color: var(--wood);
-      opacity: .7;
-      pointer-events: none;
-    }
-
-    section { padding: 30px 0; }
-
-    h2 {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 18px;
-      color: var(--olive);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(25px, 6vw, 40px);
-      letter-spacing: .12em;
-      font-weight: 500;
-      text-transform: uppercase;
-    }
-
-    h2 span { font-size: .72em; }
-    .accordion { display: grid; gap: 14px; }
-
-    details {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 20px 22px;
-      display: grid;
-      grid-template-columns: 42px 1fr 34px;
-      gap: 14px;
-      align-items: center;
-    }
-
-    summary::-webkit-details-marker { display: none; }
-
-    .leafIcon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(138,103,65,.10);
-      color: var(--sage);
-      font-size: 22px;
-    }
-
-    .meta { display: grid; gap: 4px; }
-
-    .tag {
-      font-size: 12px;
-      color: var(--wood);
-      font-weight: 900;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(17px, 4.4vw, 25px);
-      font-weight: 700;
-      letter-spacing: .01em;
-    }
-
-    .date {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .chev {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--wood);
-      background: rgba(95,108,79,.11);
-      transition: .3s ease;
-      font-weight: 900;
-    }
-
-    details[open] .chev {
-      rotate: 45deg;
-      background: rgba(138,103,65,.15);
-    }
-
-    .content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .45s ease;
-      border-top: 1px solid var(--line);
-    }
-
-    details[open] .content { max-height: 2600px; }
-
-    .songs {
-      display: grid;
-      gap: 10px;
-      padding: 18px;
-    }
-
-    .song {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 14px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.44);
-      border: 1px solid rgba(92,75,49,.10);
-    }
-
-    .songName {
-      font-weight: 850;
-      line-height: 1.45;
-    }
-
-    .songName small {
-      display: block;
-      color: var(--muted);
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .links {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .song a,
-    .official a {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      border-radius: 999px;
-      padding: 9px 13px;
-      background: rgba(255,250,241,.75);
-      border: 1px solid var(--line);
-      color: var(--wood);
-      font-weight: 850;
-      font-size: 12px;
-      transition: .25s ease;
-      white-space: nowrap;
-    }
-
-    .song a:hover,
-    .official a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(74, 56, 32, 0.13);
-      background: rgba(255,250,241,.98);
-    }
-
-    .official-footer {
-      margin-top: 38px;
-      padding: 42px 0 48px;
-      text-align: center;
-      color: rgba(255,250,241,.92);
-      background:
-        radial-gradient(circle at 20% 0%, rgba(255,250,241,.16), transparent 32%),
-        linear-gradient(135deg, #6d755a, #8a6741);
-    }
-
-    .official-footer h2 {
-      justify-content: center;
-      color: rgba(255,250,241,.94);
-      font-size: clamp(20px, 5vw, 30px);
-      margin-bottom: 22px;
-    }
-
-    .official {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .official a {
-      min-width: 126px;
-      justify-content: center;
-      color: #5f513d;
-      background: rgba(255,250,241,.88);
-    }
-
-    .copyright {
-      margin-top: 28px;
-      color: rgba(255,250,241,.72);
-      font-size: 13px;
-    }
-
-    .hidden { display: none !important; }
-
-    @media (max-width: 640px) {
-      .hero-image { height: 210px; }
-
-      .menu {
-        gap: 6px;
-        padding: 10px 0;
+    /* パソコンなど画面が広いとき（横幅が600px以上）の調整 */
+    @media (min-width: 600px) {
+      .site-header {
+        flex-direction: column; /* PCでも美しいアートを中央に魅せるため縦並びを維持 */
+        padding: 30px 20px;
       }
-
-      .menu a {
-        min-width: auto;
-        flex: 1;
-        padding: 10px 8px;
-        font-size: 13px;
-        letter-spacing: .04em;
+      .nav-item {
+        font-size: 14px;
+        gap: 25px;
       }
-
-      .intro {
-        padding: 40px 0 20px;
-        text-align: left;
-      }
-
-      .intro::before,
-      .intro::after { display: none; }
-
-      h1 { letter-spacing: .08em; }
-
-      summary {
-        grid-template-columns: 34px 1fr 30px;
-        gap: 10px;
-        padding: 17px 15px;
-      }
-
-      .leafIcon {
-        width: 34px;
-        height: 34px;
-        font-size: 18px;
-      }
-
-      .song { grid-template-columns: 1fr; }
-      .links { justify-content: flex-start; }
-      .song a { padding: 8px 11px; }
     }
   </style>
 </head>
-
 <body>
-  <header class="site-header" id="home">
-    <a href="#home" class="hero-image-link" aria-label="Back to Home">
-      <img src="kaze-logo.png" alt="Fujii Kaze Global Discography Home" class="hero-image" />
-    </a>
 
-    <nav class="nav-bar" aria-label="Primary navigation">
-      <div class="wrap menu">
-        <a href="#home">Home</a>
-        <a href="#albums">Albums</a>
-        <a href="#singles">Singles</a>
-      </div>
+  <header class="site-header">
+    
+<a href="index.html" class="logo-link" title="Go to Home">
+      <img src="kaze-logo.png" alt="Fujii Kaze Global Discography" class="header-logo-img">
+    </a>
+    
+    <nav class="header-nav">
+      <a href="index.html" class="nav-item active">HOME</a>
+      <a href="#albums" class="nav-item">ALBUMS</a>
+      <a href="#singles" class="nav-item">SINGLES</a>
+      <a href="#global-map" class="nav-item">GLOBAL MAP</a>
+      <a href="#about" class="nav-item">ABOUT</a>
     </nav>
+    
   </header>
 
-  <main class="wrap">
-    <section class="intro">
-      <div class="eyebrow">THE GLOBAL DISCOGRAPHY</div>
-      <h1>Fujii Kaze</h1>
-      <p class="lead">藤井風 / Fujii Kaze のアルバム・楽曲を、スマホで一瞬検索できるファン向けグローバル・アコーディオンDB。</p>
+  </body>
+</html>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fujii Kaze - Global Accordion Discography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f4ede2 0%, #e6dfd3 50%, #dcd4c5 100%);
+            --text-main: #2c2a29;
+            --text-sub: #65615c;
+            --accent-gold: #bfa17a;
+            --accent-gold-hover: #a3855e;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 4px 6px rgba(163, 154, 141, 0.1);
+            --shadow-md: 0 10px 20px rgba(163, 154, 141, 0.15);
+            --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            --font-en: 'Cinzel', serif;
+            --font-jp: 'Noto Sans JP', sans-serif;
+        }
 
-      <div class="searchBox">
-        <input id="search" type="search" placeholder="Search songs / albums... 例：Kirari, まつり, Prema" autocomplete="off" />
-        <span class="searchMark">⌕</span>
-      </div>
-    </section>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <section id="albums">
-      <h2><span>♫</span> Albums</h2>
-      <div class="accordion" id="albumList"></div>
-    </section>
+        body {
+            font-family: var(--font-jp);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0 20px;
+        }
 
-    <section id="singles">
-      <h2><span>☙</span> Singles / Other</h2>
-      <div class="accordion" id="singleList"></div>
-    </section>
-  </main>
+        .container {
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 60px 0 100px;
+        }
 
-  <footer class="official-footer">
-    <div class="wrap">
-      <h2>Official Links</h2>
-      <div class="official">
-        <a href="https://fujiikaze.com/" target="_blank" rel="noopener">☙ Official Site</a>
-        <a href="https://www.youtube.com/channel/UCNIy6zQyP7SuLEIaiwymfUA" target="_blank" rel="noopener">▶ YouTube</a>
-        <a href="https://www.instagram.com/fujiikaze/" target="_blank" rel="noopener">◎ Instagram</a>
-        <a href="https://open.spotify.com/artist/6bDWAcdtVR3WHz2xtiIPUi" target="_blank" rel="noopener">♫ Spotify</a>
-      </div>
-      <div class="copyright">© Fujii Kaze Global Accordion DB</div>
-    </div>
-  </footer>
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out;
+        }
 
-  <script>
-    const albums = [
-      {
-        cat: "3rd Album",
-        title: "Prema",
-        date: "2025.09.05",
-        songs: [
-          { name: "Casket Girl", spotify: "https://open.spotify.com/track/46LSraL1efyLHbM5DehGtN" },
-          { name: "I Need U Back", spotify: "https://open.spotify.com/track/2D7Bqzfa2pJqa0LUftrVgx" },
-          { name: "Hachiko", spotify: "https://open.spotify.com/track/3Aj0zsny1zlTLevRxfEEKc" },
-          { name: "Love Like This", spotify: "https://open.spotify.com/track/45uzEq3hAOy8uayrvDLY2C" },
-          { name: "Prema", spotify: "https://open.spotify.com/track/0IByNT868RxZwmcj1rQgno" },
-          { name: "It Ain't Over", spotify: "https://open.spotify.com/track/7xWKGIFGLxBJAyGSus7BOJ" },
-          { name: "You", spotify: "https://open.spotify.com/track/2vQhYhGSBBamRhhJeWprr1" },
-          { name: "Okay, Goodbye", spotify: "https://open.spotify.com/track/1Vw0JiY6Jk8vCypHzb3fo4" },
-          { name: "Forever Young", spotify: "https://open.spotify.com/track/3K0Xr4N0ccBKqBBHDARIFy" }
-        ]
-      },
-      {
-        cat: "2nd Album",
-        title: "LOVE ALL COVER ALL",
-        date: "2022.03.23",
-        songs: [
-          { name: "Sunny", spotify: "https://open.spotify.com/search/Sunny%20Fujii%20Kaze/tracks" },
-          { name: "No Tears Left To Cry", spotify: "https://open.spotify.com/track/2ggGdrhcOlUh7BpirycPf4" },
-          { name: "Hot Stuff", spotify: "https://open.spotify.com/track/2JS2MXOcqKr8zZo8cbsOfy" },
-          { name: "Sorry", spotify: "https://open.spotify.com/track/6tbSgMKlQ31izXvorTATrn" },
-          { name: "Good As Hell", spotify: "https://open.spotify.com/track/1Ne4bYb1ZoGShX3Q0ORoY7" },
-          { name: "Just the Two of Us", spotify: "https://open.spotify.com/track/25rJtfnU4uqPj4iD96JGMv" },
-          { name: "Weak", spotify: "https://open.spotify.com/search/Weak%20Fujii%20Kaze/tracks" },
-          { name: "Overprotected", spotify: "https://open.spotify.com/track/0Ogz120T98XLakKbkK0uZe" },
-          { name: "Teenage Dream", spotify: "https://open.spotify.com/track/0pGCX84PwhZJvj1KXO11HH" },
-          { name: "Eh, Eh", spotify: "https://open.spotify.com/search/Eh%20Eh%20Fujii%20Kaze/tracks" },
-          { name: "Circles", spotify: "https://open.spotify.com/track/12OzpDDrf5OSwymIJKaRuf" }
-        ]
-      },
-      {
-        cat: "2nd Album",
-        title: "LOVE ALL SERVE ALL",
-        date: "2022.03.23",
-        songs: [
-          { name: "きらり (Kirari)", spotify: "https://open.spotify.com/track/7nhXN2H8h3i2PaHPXb6FO3" },
-          { name: "まつり (Matsuri)", spotify: "https://open.spotify.com/track/7AMGgAPFczs3wJgMqu6Eqi" },
-          { name: "へでもねーよ (Hedemo Ne-Yo)", spotify: "https://open.spotify.com/track/4Lrz9Fg8L1yncuCjjKjD4D" },
-          { name: "やば。 (Yaba)", spotify: "https://open.spotify.com/track/3DyekzXIo7Or5Krd0eAmo5" },
-          { name: "燃えよ (MO-E-YO)", spotify: "https://open.spotify.com/track/2fMdT98JpheoBh6t8DBSjI" },
-          { name: "ガーデン (Garden)", spotify: "https://open.spotify.com/track/2vMc8rqFmqs7RFi8NDx0CJ" },
-          { name: "Damn", spotify: "https://open.spotify.com/track/7dNxxkapvf5eRkw24PHSpy" },
-          { name: "ロンリーラプソディ (Lonely Rhapsody)", spotify: "https://open.spotify.com/track/2Q0LpnMDXazZk49AWEiHE2" },
-          { name: "それでは、 (Then,)", spotify: "https://open.spotify.com/track/4Y9QwoUwo9blH9R9C5DCnk" },
-          { name: "青春病 (Seishun Sick)", spotify: "https://open.spotify.com/track/2PDtvT5DEamQTM5qeiTDsR" },
-          { name: "旅路 (Tabiji)", spotify: "https://open.spotify.com/track/6SyvPeEmj4yBblsKIyiGqT" }
-        ]
-      },
-      {
-        cat: "1st Album",
-        title: "LOVE ALL COVER ALL",
-        date: "2020.05.20",
-        songs: [
-          { name: "Close to You", spotify: "https://open.spotify.com/track/02QcM5pBEymkl6gXb4RHex" },
-          { name: "Shape of You", spotify: "https://open.spotify.com/track/3VcT4kpalhVmwBvTj9WUwW" },
-          { name: "Back Stabbers", spotify: "https://open.spotify.com/track/6w0aitSQVR7Zo8ZN5aH6ki" },
-          { name: "Alfie", spotify: "https://open.spotify.com/search/Alfie%20Fujii%20Kaze/tracks" },
-          { name: "Be Alright", spotify: "https://open.spotify.com/track/0Roq5A8tnn2HgarMwUWZPI" },
-          { name: "Beat It", spotify: "https://open.spotify.com/track/6FdivTVszyP1FNECK5NtKi" },
-          { name: "Don't Let Me Be Misunderstood", spotify: "https://open.spotify.com/search/Don't%20Let%20Me%20Be%20Misunderstood%20Fujii%20Kaze/tracks" },
-          { name: "My Eyes Adored You", spotify: "https://open.spotify.com/track/1zBtOH6KLWwbLX4lSJc1qY" },
-          { name: "Shake It Off", spotify: "https://open.spotify.com/track/2PEERoxfcVUZlKKiUfNlnW" },
-          { name: "Stronger Than Me", spotify: "https://open.spotify.com/track/2uilgK5ztct747wpqBG7S0" },
-          { name: "Time After Time", spotify: "https://open.spotify.com/track/2XBjTCpuKYxJ0C4UUDxcZL" }
-        ]
-      },
-      {
-        cat: "1st Album",
-        title: "HELP EVER HURT NEVER",
-        date: "2020.05.20",
-        songs: [
-          { name: "何なんw (Nan-Nan)", spotify: "https://open.spotify.com/track/2CbGuO0LtVvbh3umN3mDwM" },
-          { name: "もうええわ (Mo-Eh-Wa)", spotify: "https://open.spotify.com/track/1JRNrJKTQhfvxII8kkIcAQ" },
-          { name: "優しさ (Yasashisa)", spotify: "https://open.spotify.com/track/57u1FaZlztApkcT5x5XNuD" },
-          { name: "キリがないから (Kiri Going On)", spotify: "https://open.spotify.com/track/7i5pytF8KaId51lIzatwdg" },
-          { name: "罪の香り (Tsumi no Kaori)", spotify: "https://open.spotify.com/track/7r9v0CLTunOwlbvdOFFgZo" },
-          { name: "調子のっちゃって (Choji Nocchatte)", spotify: "https://open.spotify.com/track/74Zrps4gc3qTF49oKpm6zF" },
-          { name: "特にない (Tokuninai)", spotify: "https://open.spotify.com/track/6AJppuCk5EE86paOdDI4yL" },
-          { name: "死ぬのがいいわ (Shinunoga E-Wa)", spotify: "https://open.spotify.com/track/0o9zmvc5f3EFApU52PPIyW" },
-          { name: "風よ (Kazeyo)", spotify: "https://open.spotify.com/track/5cpOWNmI84MuUCeciETO64" },
-          { name: "さよならべいべ (Sayonara Baby)", spotify: "https://open.spotify.com/search/Sayonara%20Baby%20Fujii%20Kaze/tracks" },
-          { name: "帰ろう (Kaerou)", spotify: "https://open.spotify.com/track/26e8ujjSpBAHhIY2ymLUT1" }
-        ]
-      }
-    ];
+        h1 {
+            font-family: var(--font-en);
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
 
-    const singles = [
-      {
-        cat: "Digital Singles / Other",
-        title: "Digital Singles / Other",
-        date: "2019 - 2025",
-        songs: [
-          { name: "Love Like This 2025.08.01", spotify: "https://open.spotify.com/track/2tMT6ljz6rXtQpFIqoo7Em" },
-          { name: "Hachiko 2025.06.13", spotify: "https://open.spotify.com/track/3Aj0zsny1zlTLevRxfEEKc" },
-          { name: "真っ白 (Mashiro) 2025.02.28", spotify: "https://open.spotify.com/search/%E7%9C%9F%E3%81%A3%E7%99%BD%20Fujii%20Kaze/tracks" },
-          { name: "Feelin’ Go(o)d 2024.07.26", spotify: "https://open.spotify.com/search/Feelin%20Good%20Fujii%20Kaze/tracks" },
-          { name: "満ちてゆく (Overflowing) 2024.03.15", spotify: "https://open.spotify.com/track/3Ez9uxIM4nwbAZRAdJvBxS" },
-          { name: "Workin’ Hard 2023.08.25", spotify: "https://open.spotify.com/search/Workin%20Hard%20Fujii%20Kaze/tracks" },
-          { name: "grace 2022.10.10", spotify: "https://open.spotify.com/search/grace%20Fujii%20Kaze/tracks" },
-          { name: "damn 2022.09.30", spotify: "https://open.spotify.com/track/7dNxxkapvf5eRkw24PHSpy" },
-          { name: "まつり (Matsuri) 2022.03.20", spotify: "https://open.spotify.com/track/7AMGgAPFczs3wJgMqu6Eqi" },
-          { name: "燃えよ (MO-E-YO) 2021.09.04", spotify: "https://open.spotify.com/track/2fMdT98JpheoBh6t8DBSjI" },
-          { name: "きらり (Kirari) 2021.05.03", spotify: "https://open.spotify.com/track/7nhXN2H8h3i2PaHPXb6FO3" },
-          { name: "旅路 (Tabiji) 2021.03.01", spotify: "https://open.spotify.com/track/1EM9pvygHqQm03as6sxLg9" },
-          { name: "へでもねーよ (Hedemo Ne-Yo) 2020.10.30", spotify: "https://open.spotify.com/search/Hedemo%20Ne-Yo%20Fujii%20Kaze/tracks" },
-          { name: "青春病 (Seishun Sick) 2020.10.30", spotify: "https://open.spotify.com/search/Seishun%20Sick%20Fujii%20Kaze/tracks" },
-          { name: "キリがないから (Kiri Going On) 2020.05.15", spotify: "https://open.spotify.com/track/0puZUrjhNhWl98RdE7YfNM" },
-          { name: "優しさ (Yasashisa) 2020.04.17", spotify: "https://open.spotify.com/track/57u1FaZlztApkcT5x5XNuD" },
-          { name: "もうええわ (Mo-Eh-Wa) 2019.12.24", spotify: "https://open.spotify.com/track/1JRNrJKTQhfvxII8kkIcAQ" },
-          { name: "何なんw (Nan-Nan) 2019.11.18", spotify: "https://open.spotify.com/track/2CbGuO0LtVvbh3umN3mDwM" }
-        ]
-      }
-    ];
+        .subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            color: var(--text-sub);
+            font-weight: 300;
+        }
 
-    const cleanSongTitle = song =>
-      song
-        .replace(/\d{4}\.\d{2}\.\d{2}/g, "")
-        .replace(/\(.+?\)/g, "")
-        .trim();
+        .search-container {
+            position: relative;
+            margin-bottom: 40px;
+            animation: fadeIn 1.2s ease-out;
+        }
 
-    const youtubeSearch = song =>
-      `https://www.youtube.com/results?search_query=${encodeURIComponent("Fujii Kaze " + cleanSongTitle(song) + " official")}`;
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 24px; /* 右側に✕ボタンが入るスペースを確保 */
+            font-size: 1rem;
+            font-family: var(--font-jp);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+            outline: none;
+        }
 
-    function createCard(item) {
-      const text = `${item.cat} ${item.title} ${item.date} ${item.songs.map(song => song.name).join(" ")}`.toLowerCase();
+        .search-input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-md);
+            background: rgba(255, 255, 255, 0.9);
+        }
 
-      return `
-        <details class="item" data-text="${text}">
-          <summary>
-            <span class="leafIcon">☙</span>
-            <span class="meta">
-              <span class="tag">${item.cat}</span>
-              <span class="title">${item.title}</span>
-              <span class="date">${item.date}</span>
-            </span>
-            <span class="chev">＋</span>
-          </summary>
-          <div class="content">
-            <div class="songs">
-              ${item.songs.map(song => `
-                <div class="song">
-                  <div class="songName">
-                    ${song.name}
-                    <small>Fujii Kaze / 藤井風</small>
-                  </div>
-                  <div class="links">
-                    <a href="${youtubeSearch(song.name)}" target="_blank" rel="noopener">▶ YouTube</a>
-                    <a href="${song.spotify}" target="_blank" rel="noopener">♫ Spotify</a>
-                  </div>
+        .search-input::placeholder {
+            color: #a8a39d;
+            font-weight: 300;
+        }
+
+        /* ✕（クリア）ボタンのスタイリングを追加 */
+        .search-clear-btn {
+            display: none; /* 初期状態は非表示 */
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-sub);
+            font-size: 1.2rem;
+            padding: 5px;
+            transition: var(--transition-smooth);
+            outline: none;
+        }
+
+        .search-clear-btn:hover {
+            color: var(--accent-gold);
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .accordion-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .accordion-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+        }
+
+        .accordion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .accordion-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .album-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .album-tag {
+            font-family: var(--font-en);
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .album-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--text-main);
+        }
+
+        .icon-chevron {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-sub);
+            stroke-width: 1.5;
+            fill: none;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .accordion-item.active .icon-chevron {
+            transform: rotate(180deg);
+            stroke: var(--accent-gold);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .track-list {
+            list-style: none;
+            padding: 0 24px 24px 24px;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+            transition: opacity 0.3s ease;
+        }
+
+        .track-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .track-name {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-right: 16px;
+        }
+
+        .track-ja {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text-main);
+        }
+
+        .track-en {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            font-weight: 300;
+        }
+
+        .track-links {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: var(--transition-smooth);
+            color: var(--text-sub);
+        }
+
+        .btn-link:hover {
+            transform: scale(1.08);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-link.spotify:hover {
+            color: #1db954;
+            background: #f0fbf4;
+        }
+
+        .btn-link.youtube:hover {
+            color: #ff0000;
+            background: #fff0f0;
+        }
+
+        .btn-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            font-weight: 300;
+            display: none;
+        }
+
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding-top: 40px;
+        }
+
+        .footer-title {
+            font-family: var(--font-en);
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .sns-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn-sns {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-sub);
+            font-family: var(--font-en);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-sns:hover {
+            color: var(--text-main);
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: #ffffff;
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            color: #a8a39d;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 0 16px; }
+            .container { padding: 40px 0 60px; }
+            h1 { font-size: 2rem; }
+            .accordion-header { padding: 20px; }
+            .track-list { padding: 0 20px 20px 20px; }
+            .track-ja { font-size: 0.9rem; }
+            .btn-sns { padding: 8px 16px; font-size: 0.7rem; }
+            .sns-links { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Fujii Kaze</h1>
+            <p class="subtitle">Global Discography & Directory</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search track or album... / 楽曲名・アルバム名で検索">
+            <button id="searchClearBtn" class="search-clear-btn" title="Clear search">✕</button>
+        </div>
+
+        <main class="accordion-wrapper" id="accordionWrapper">
+            
+            <div class="accordion-item" data-search="1st Album HELP EVER HURT NEVER 2020 何なんw Nan-Nan もうええわ Mo-Eh-Wa 優しさ Yasashisa キリがないから Kiri Going On 罪の香り Tsumi no Kaori 調子のっちゃって Choji Nocchatte 特にない Tokuninai 死ぬのがいいわ Shinunoga E-Wa 風よ Kazeyo さよならべいべ Sayonara Baby 帰ろう Kaerou">
+                <button class="accordion-header">
+                    <div class="album-info">
+                        <span class="album-tag">【1st Album】</span>
+                        <span class="album-title">HELP EVER HURT NEVER (2020)</span>
+                    </div>
+                    <svg class="icon-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="track-list">
+                        <script>
+                            const sp_nan_nan       = "https://open.spotify.com/intl-ja/track/2Nl3vx5qRnATIckVRZxb4T?si=8d85b54f4bd44452";
+                            const sp_mo_eh_wa      = "https://open.spotify.com/intl-ja/track/7vBvAgZizx6wvlVXMbvuf4?si=9783e6ad73344811";
+                            const sp_yasashisa     = "https://open.spotify.com/intl-ja/track/0f3Ce9xjHymExIpEyHUC8D?si=01b1a96e5ff14490";
+                            const sp_kiri          = "https://open.spotify.com/intl-ja/track/0puZUrjhNhWl98RdE7YfNM?si=7d7f728c71944f66";
+                            const sp_tsumi         = "https://open.spotify.com/intl-ja/track/0tJmd8OMwEBesfTsvuGayw?si=311824e5073f49d3";
+                            const sp_choji         = "https://open.spotify.com/intl-ja/track/2fxqcSRl5dUiMAcSigsmkh?si=c1be263f2ece4eb4";
+                            const sp_tokuninai     = "https://open.spotify.com/intl-ja/track/5UiZWCqMerAvmiHtQwTKSj?si=e25425d8a275458c";
+                            const sp_shinunoga1st   = "https://open.spotify.com/intl-ja/track/0HYAsQwJIO6FLqpyTeD3l6?si=a56d9e68c4044ea0";
+                            const sp_kazeyo        = "https://open.spotify.com/intl-ja/track/77NDAeUdOg9ODtEhbZjAb4?si=4ac62e18f7484e9f";
+                            const sp_sayonara      = "https://open.spotify.com/intl-ja/track/58zXQUhb3NXbY2QjhRgTNL?si=8474d695af1b4eea";
+                            const sp_kaerou        = "https://open.spotify.com/intl-ja/track/6Dmxt4rbi97c7sjoWRrJoj?si=2cdca139d434402f";
+
+                            const tracks1st = [
+                                { ja: "何なんw", en: "Nan-Nan", sp: sp_nan_nan, yt: "https://youtu.be/Nt6ZwuVzOS4?si=kF8bJjCTgc6RY3Yx" },
+                                { ja: "もうええわ", en: "Mo-Eh-Wa", sp: sp_mo_eh_wa, yt: "https://youtu.be/y4FYCJRjHBg?si=uWNugZrGtyrQMY8g" },
+                                { ja: "優しさ", en: "Yasashisa", sp: sp_yasashisa, yt: "https://youtu.be/vzhTpIIQR5I?si=jV1frmJsn637Maj4" },
+                                { ja: "キリがないから", en: "Kiri Going On", sp: sp_kiri, yt: "https://youtu.be/9f-tksBZ1Wk?si=q8UlZ-XIFQW8XTWZ" },
+                                { ja: "罪の香り", en: "Tsumi no Kaori", sp: sp_tsumi, yt: "https://youtu.be/Ppf9IQgVarU?si=zuVxsJu0276eXbeN" },
+                                { ja: "調子のっちゃって", en: "Choji Nocchatte", sp: sp_choji, yt: "https://youtu.be/ihdYF6enCsU?si=xSiHCnKbT0DOmuSh" },
+                                { ja: "特にない", en: "Tokuninai", sp: sp_tokuninai, yt: "https://youtu.be/VsmToj4IyPw?si=k-sh0eog7BLu6_xR" },
+                                { ja: "死ぬのがいいわ", en: "Shinunogaiiwa", sp: sp_shinunoga1st, yt: "https://youtu.be/dawrQnvwMTY?si=Lq-zujIqqWqcIXF9" },
+                                { ja: "風よ", en: "Kazeyo", sp: sp_kazeyo, yt: "https://youtu.be/AmF0xNMRaP0?si=jPnFza6BR6RZ-HGW" },
+                                { ja: "さよならベイベ", en: "SAYONARA Baby", sp: sp_sayonara, yt: "https://youtu.be/zXeusg_KEXY?si=J6iAukonkN8K5eXB" },
+                                { ja: "帰ろう", en: "Kaerou", sp: sp_kaerou, yt: "https://youtu.be/goU1Ei8I8uk?si=qDdXjfdtr902cP05" }
+                            ];
+                            document.write(tracks1st.map(t => `
+                                <li class="track-item" data-name="${t.ja.toLowerCase()} ${t.en.toLowerCase()}">
+                                    <div class="track-name">
+                                        <span class="track-ja">${t.ja}</span>
+                                        <span class="track-en">${t.en}</span>
+                                    </div>
+                                    <div class="track-links">
+                                        <a href="${t.sp}" target="_blank" rel="noopener" class="btn-link spotify" title="Spotify"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.076-.336.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.722c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.08-1.182-.412.125-.845-.107-.97-.52-.124-.412.108-.847.52-.972 3.666-1.11 8.242-.564 11.346 1.343.366.226.486.706.258 1.072zm.105-2.833C14.383 8.8 8.417 8.604 4.978 9.648c-.522.158-1.076-.143-1.235-.665-.158-.522.143-1.076.665-1.235C8.355 6.43 14.948 6.65 19.006 9.06c.47.28.622.89.342 1.36-.28.47-.89.622-1.36.342z"/></svg></a>
+                                        <a href="${t.yt}" target="_blank" rel="noopener" class="btn-link youtube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                                    </div>
+                                </li>
+                            `).join(''));
+                        </script>
+                    </ul>
                 </div>
-              `).join("")}
             </div>
-          </div>
-        </details>
-      `;
-    }
 
-    document.getElementById("albumList").innerHTML = albums.map(createCard).join("");
-    document.getElementById("singleList").innerHTML = singles.map(createCard).join("");
+            <div class="accordion-item" data-search="2nd Album LOVE ALL SERVE ALL 2022 きらり Kirari まつり Matsuri へでもねーよ Hedemo Ne-Yo 青春病 Seishun Sick ガーデン Garden 旅路 Tabiji やば。 YABA 燃えよ MO-EH-YO それでは、 Then, ロンリーラプソディ Lonely Rhapsody ダム Damn">
+                <button class="accordion-header">
+                    <div class="album-info">
+                        <span class="album-tag">【2nd Album】</span>
+                        <span class="album-title">LOVE ALL SERVE ALL (2022)</span>
+                    </div>
+                    <svg class="icon-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="track-list">
+                        <script>
+                            const sp_kirari        = "https://open.spotify.com/intl-ja/track/3L7ISJTvKx56uhsF28aJ4p?si=ee606f1d4671475d";
+                            const sp_matsuri       = "https://open.spotify.com/intl-ja/track/3OdkC5pG8vc26S26qHyBo8?si=ed9e8dbe515a4216";
+                            const sp_hedemo        = "https://open.spotify.com/intl-ja/track/7LI2pQoE3fWfOQuds2paXs?si=298f90e34fe64a24";
+                            const sp_yaba          = "https://open.spotify.com/intl-ja/track/1FDCEz8kY256zhDO2GjWuW?si=eda903bc67cb4edf";
+                            const sp_moeyo         = "https://open.spotify.com/intl-ja/track/3nPRJP6hLZx32covZfpB6p?si=10f3b5329cb34906";
+                            const sp_garden        = "https://open.spotify.com/intl-ja/track/5U4PgFWzfzY7VEg9Ck4ziF?si=78ae8ed28dec4b1c";
+                            const sp_damn          = "https://open.spotify.com/intl-ja/track/7dNxxkapvf5eRkw24PHSpy?si=547c95091171436d";
+                            const sp_lonlyrhapsody = "https://open.spotify.com/intl-ja/track/2T2PRhaEQLPoo78E8zyVgw?si=abc1841eb2424c58";
+                            const sp_then          = "https://open.spotify.com/intl-ja/track/5qGpsL9fCOr1sGYNMmFFtI?si=a424f32c53a64a10";
+                            const sp_seishun       = "https://open.spotify.com/intl-ja/track/6bioW1LHzS92xtmWT6NeWl?si=46a1ab45be654bee";
+                            const sp_tabiji        = "https://open.spotify.com/intl-ja/track/7uSLJCDetmdm3tQcoYLyty?si=8fbacf40ff1e4f13";
 
-    const search = document.getElementById("search");
-    const allItems = [...document.querySelectorAll(".item")];
+                            const tracks2nd = [
+                                { ja: "きらり", en: "Kirari", sp: sp_kirari, yt: "https://youtu.be/TcLLpZBWsck?si=tHKDgwcmrYwm8NmF" },
+                                { ja: "まつり", en: "Matsuri", sp: sp_matsuri, yt: "https://youtu.be/NwOvu-j_WjY?si=xd5lC69oKrnVlehj" },
+                                { ja: "へでもねーよ", en: "Hedemo Ne-Yo", sp: sp_hedemo, yt: "https://youtu.be/MsGDkuzrKCU?si=NVhEaPzyIQhXpwDT" },
+                                { ja: "やば。", en: "YABA", sp: sp_yaba, yt: "https://youtu.be/7xbokCesviM?si=ppxJKjilj5SJN2dH" },
+                                { ja: "燃えよ", en: "MO-EH-YO", sp: sp_moeyo, yt: "https://youtu.be/rZxR9bpsYLU?si=ILsm1gqgjkoWFl1D" },
+                                { ja: "ガーデン", en: "Garden", sp: sp_garden, yt: "https://youtu.be/vkPfKnUaq5k?si=4dhdOblkpePxs3fN" },
+                                { ja: "Damn", en: "Damn", sp: sp_damn, yt: "https://youtu.be/yP7K2lXr6GA?si=0S44aAe_41SR651D" },
+                                { ja: "ロンリーラプソディ", en: "Lonely Rhapsody", sp: sp_lonlyrhapsody, yt: "https://youtu.be/I3oUsW9bXvQ?si=ELW0FdFBKKkm7lfw" },
+                                { ja: "それでは、", en: "Then,", sp: sp_then, yt: "https://youtu.be/1cXlo7vkxhE?si=HtIZwO9lPvaiZCFj" },
+                                { ja: "青春病", en: "Seishun Sick", sp: sp_seishun, yt: "https://youtu.be/kQvT37OzkP8?si=UfVnKJqcITpnCZ0t" },
+                                { ja: "旅路", en: "Tabiji", sp: sp_tabiji, yt: "https://youtu.be/29p8FvT_puU?si=owADX8b7nGfe3jFH" }
+                            ];
+                            document.write(tracks2nd.map(t => `
+                                <li class="track-item" data-name="${t.ja.toLowerCase()} ${t.en.toLowerCase()}">
+                                    <div class="track-name">
+                                        <span class="track-ja">${t.ja}</span>
+                                        <span class="track-en">${t.en}</span>
+                                    </div>
+                                    <div class="track-links">
+                                        <a href="${t.sp}" target="_blank" rel="noopener" class="btn-link spotify" title="Spotify"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.076-.336.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.722c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.08-1.182-.412.125-.845-.107-.97-.52-.124-.412.108-.847.52-.972 3.666-1.11 8.242-.564 11.346 1.343.366.226.486.706.258 1.072zm.105-2.833C14.383 8.8 8.417 8.604 4.978 9.648c-.522.158-1.076-.143-1.235-.665-.158-.522.143-1.076.665-1.235C8.355 6.43 14.948 6.65 19.006 9.06c.47.28.622.89.342 1.36-.28.47-.89.622-1.36.342z"/></svg></a>
+                                        <a href="${t.yt}" target="_blank" rel="noopener" class="btn-link youtube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                                    </div>
+                                </li>
+                            `).join(''));
+                        </script>
+                    </ul>
+                </div>
+            </div>
 
-    search.addEventListener("input", e => {
-      const q = e.target.value.trim().toLowerCase();
+            <div class="accordion-item" data-search="Digital Singles Other 満ちてゆく Overflowing 花 Hana Workin' Hard Grace 死ぬのがいいわ Shinunoga E-Wa">
+                <button class="accordion-header">
+                    <div class="album-info">
+                        <span class="album-tag">【Digital Singles / Other】</span>
+                        <span class="album-title">Singles & Highlights</span>
+                    </div>
+                    <svg class="icon-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="accordion-content">
+                    <ul class="track-list">
+                        <script>
+                            const sp_michiteyuku  = "ここに『満ちてゆく』のSpotify URL"; 
+                            const sp_hana         = "ここに『花』のSpotify URL";
+                            const sp_workin       = "ここに『Workin' Hard』のSpotify URL";
+                            const sp_grace        = "ここに『Grace』のSpotify URL";
+                            const sp_shinunoga2nd = "ここに『死ぬのがいいわ』のSpotify URL";
 
-      allItems.forEach(item => {
-        item.open = false;
-        item.classList.remove("hidden");
+                            const tracksSingles = [
+                                { ja: "満ちてゆく", en: "Overflowing", sp: sp_michiteyuku, yt: "https://www.youtube.com/watch?v=Nh33YPJ180k" },
+                                { ja: "花", en: "Hana", sp: sp_hana, yt: "https://www.youtube.com/watch?v=rZXVmxFrW8A" },
+                                { ja: "Workin' Hard", en: "Workin' Hard", sp: sp_workin, yt: "https://www.youtube.com/watch?v=88wHgiUakv8" },
+                                { ja: "Grace", en: "Grace", sp: sp_grace, yt: "https://www.youtube.com/watch?v=rXI6DCH1VVM" },
+                                { ja: "死ぬのがいいわ", en: "Shinunoga E-Wa", sp: sp_shinunoga2nd, yt: "https://www.youtube.com/watch?v=dawrQnvwqwY" }
+                            ];
+                            document.write(tracksSingles.map(t => `
+                                <li class="track-item" data-name="${t.ja.toLowerCase()} ${t.en.toLowerCase()}">
+                                    <div class="track-name">
+                                        <span class="track-ja">${t.ja}</span>
+                                        <span class="track-en">${t.en}</span>
+                                    </div>
+                                    <div class="track-links">
+                                        <a href="${t.sp}" target="_blank" rel="noopener" class="btn-link spotify" title="Spotify"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.076-.336.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.722c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.08-1.182-.412.125-.845-.107-.97-.52-.124-.412.108-.847.52-.972 3.666-1.11 8.242-.564 11.346 1.343.366.226.486.706.258 1.072zm.105-2.833C14.383 8.8 8.417 8.604 4.978 9.648c-.522.158-1.076-.143-1.235-.665-.158-.522.143-1.076.665-1.235C8.355 6.43 14.948 6.65 19.006 9.06c.47.28.622.89.342 1.36-.28.47-.89.622-1.36.342z"/></svg></a>
+                                        <a href="${t.yt}" target="_blank" rel="noopener" class="btn-link youtube" title="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                                    </div>
+                                </li>
+                            `).join(''));
+                        </script>
+                    </ul>
+                </div>
+            </div>
 
-        if (!q) return;
+        </main>
 
-        const hit = item.dataset.text.includes(q);
-        item.classList.toggle("hidden", !hit);
-        if (hit) item.open = true;
-      });
-    });
+        <div id="noResults" class="no-results">No tracks match your search. / 該当する楽曲が見つかりません。</div>
 
-    search.addEventListener("search", () => {
-      if (!search.value) {
-        allItems.forEach(item => {
-          item.open = false;
-          item.classList.remove("hidden");
+        <footer>
+            <p class="footer-title">Official Links</p>
+            <div class="sns-links">
+                <a href="https://fujiikaze.com/" target="_blank" rel="noopener" class="btn-sns">Official Site</a>
+                <a href="https://www.youtube.com/c/FujiiKaze" target="_blank" rel="noopener" class="btn-sns">YouTube</a>
+                <a href="https://www.instagram.com/fujiikaze/" target="_blank" rel="noopener" class="btn-sns">Instagram</a>
+            </div>
+            <p class="copyright">© Fujii Kaze Discography Hub. Designed for global listeners.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            const searchInput = document.getElementById('searchInput');
+            const searchClearBtn = document.getElementById('searchClearBtn'); // ✕ボタンを取得
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            const noResults = document.getElementById('noResults');
+
+            // 共通処理：完全に初期状態（トップページ）にリセットする関数
+            function resetSearch() {
+                searchInput.value = ""; // 入力文字を消去
+                searchClearBtn.style.display = 'none'; // ✕ボタンを隠す
+                noResults.style.display = 'none'; // エラーメッセージを隠す
+
+                accordionItems.forEach(item => {
+                    item.style.display = 'block'; // すべてのアルバムを表示
+                    item.classList.remove('active'); // アコーディオンの開閉フラグを外す
+                    item.querySelector('.accordion-content').style.maxHeight = null; // スムーズに閉じる
+                    
+                    // 中の楽曲リストもすべて通常表示（flex）に戻す
+                    const trackItems = item.querySelectorAll('.track-item');
+                    trackItems.forEach(track => track.style.display = 'flex');
+                });
+            }
+
+            // Accordion Logic
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const content = item.querySelector('.accordion-content');
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other items
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        }
+                    });
+
+                    // Toggle current item
+                    if (isActive) {
+                        item.classList.remove('active');
+                        content.style.maxHeight = null;
+                    } else {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Fast Search Filter Logic
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                let hasVisibleItems = false;
+
+                // 【改善ポイント①】文字を消して空っぽにしたら完全に最初に戻す
+                if (query === "") {
+                    resetSearch();
+                    return;
+                }
+
+                // 文字が入っている間は「✕」ボタンを表示する
+                searchClearBtn.style.display = 'block';
+
+                accordionItems.forEach(item => {
+                    const searchAttr = item.getAttribute('data-search').toLowerCase();
+                    const trackItems = item.querySelectorAll('.track-item');
+                    let matchInAlbum = searchAttr.includes(query);
+                    let visibleTracksCount = 0;
+
+                    // Individual track filtration inside blocks
+                    trackItems.forEach(track => {
+                        const trackName = track.getAttribute('data-name').toLowerCase();
+                        if (trackName.includes(query) || matchInAlbum) {
+                            track.style.display = 'flex';
+                            visibleTracksCount++;
+                        } else {
+                            track.style.display = 'none';
+                        }
+                    });
+
+                    // If match found in track or overall structure
+                    if (visibleTracksCount > 0 || matchInAlbum) {
+                        item.style.display = 'block';
+                        hasVisibleItems = true;
+
+                        // Auto expand match contents flawlessly
+                        const content = item.querySelector('.accordion-content');
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('active');
+                        item.querySelector('.accordion-content').style.maxHeight = null;
+                    }
+                });
+
+                // Handle Empty States
+                noResults.style.display = hasVisibleItems ? 'none' : 'block';
+            });
+
+            // 【改善ポイント②】✕ボタンを押したら完全に最初に戻す
+            searchClearBtn.addEventListener('click', () => {
+                resetSearch();
+                searchInput.focus(); // ✕を押したあと、すぐ再入力できるように検索窓にフォーカスを当てる
+            });
         });
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
